@@ -91,67 +91,19 @@
       </p>
     </section>
 
-    <section id="privacy" class="content hidden">
-      <h2 data-i18n="privacy.title">Privacy Policy</h2>
-
-      <p><strong>Effective Date:</strong> May 7, 2025</p>
-
-      <h3>1. Introduction</h3>
-      <p>
-        FlashMail (“we”, “us”, “our”) provides a free disposable email service. Your privacy matters—this policy explains
-        what we collect, why, and how we use it.
-      </p>
-
-      <h3>2. Data We Collect</h3>
-      <ul>
-        <li>
-          <strong>Email Content:</strong> We parse and store incoming message headers and bodies in
-          Cloudflare Workers KV for up to 20 minutes, then they are deleted permanently.
-        </li>
-        <li>
-          <strong>Logs & Analytics:</strong> We keep minimal request logs (IP, timestamp, User-Agent) for abuse
-          prevention and debugging; logs are rotated and purged regularly.
-        </li>
-      </ul>
-
-      <h3>3. Use of Data</h3>
-      <p>
-        We only use your data to deliver messages to your temporary inbox and to maintain service security
-        and performance.
-      </p>
-
-      <h3>4. Third-Party Services</h3>
-      <ul>
-        <li><strong>Mailgun:</strong> handles SMTP-to-webhook ingestion of inbound email.</li>
-        <li><strong>Cloudflare Workers & KV:</strong> runs our API and stores messages with TTL.</li>
-        <li><strong>GitHub/Cloudflare Pages:</strong> serves static assets via CDN.</li>
-      </ul>
-
-      <h3>5. Data Retention</h3>
-      <p>
-        Messages expire 20 minutes after arrival; logs are kept for up to 30 days then deleted.
-      </p>
-
-      <h3>6. Security</h3>
-      <p>
-        HTTPS everywhere, strict Content-Security-Policy, and serverless isolation minimize risk.
-      </p>
-
-      <h3>7. Children’s Privacy</h3>
-      <p>
-        Not intended for children under 13; we do not knowingly collect data from minors.
-      </p>
-
-      <h3>8. Changes to Policy</h3>
-      <p>
-        We may update this policy—changes take effect when posted. Continued use implies acceptance.
-      </p>
-
-      <h3>9. Contact Us</h3>
-      <p>
-        For questions or data requests: <a href="mailto:privacy@flashmail.win">privacy@flashmail.win</a>
-      </p>
-    </section>
+<section id="privacy" class="content hidden">
+  <h2 data-i18n="privacy.title">Privacy Policy</h2>
+  <p><strong>Effective Date:</strong> May 7, 2025</p>
+  <p>FlashMail (“we”, “us”, “our”) is a free, disposable email service. Your privacy matters.</p>
+  <ul>
+    <li><strong>No cookies.</strong> We do not use cookies or any browser storage.</li>
+    <li><strong>No personal data.</strong> We don’t collect or store names, addresses, or any personal information.</li>
+    <li><strong>Temporary messages.</strong> Incoming emails are kept in memory for <strong>20 minutes</strong> and then deleted permanently.</li>
+    <li><strong>Ads only.</strong> We show third-party ads to keep FlashMail free—no trackers, no profiling.</li>
+    <li><strong>No tracking.</strong> We do not track your activity or share data with anyone.</li>
+  </ul>
+  <p>That’s it. Enjoy your privacy. 🚀</p>
+</section>
   </main>
 
   <footer class="site-footer">
