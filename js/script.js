@@ -6,9 +6,9 @@ const CONFIG = {
   apiBase: 'https://api.flashmail.win',
   inboxDomain: 'mg.flashmail.win'
 };
+
 let inboxActive = false;
 
-// i18n translations
 const i18n = {
   en: {
     title: 'FlashMail',
@@ -36,12 +36,20 @@ const i18n = {
     'about.title': 'About Us',
     'about.text': 'FlashMail is a disposable email service. No login, no tracking. Just privacy.',
     'privacy.title': 'Privacy Policy',
-    'privacy.text': '',
+    'privacy.text': `Effective Date: May 7, 2025
+
+No cookies. We do not use cookies or any browser storage.
+No personal data. We don’t collect or store any personal information.
+Temporary messages. Emails live 20 minutes then self-destruct.
+Ads only. We show third-party ads to keep FlashMail free—no trackers, no profiling.
+No tracking. We do not log your activity beyond basic error/abuse logs.
+That’s it. Enjoy your privacy. 🚀`,
     'toast.newMessage': 'New message received',
     'btn.close': 'Close Inbox',
     'inbox.closed': 'Inbox closed. All messages deleted.',
     'confirm.close': 'Close the inbox and delete all messages?'
   },
+
   pt: {
     title: 'FlashMail',
     'header.title': 'Seu serviço de e-mail temporário mais fácil.',
@@ -68,151 +76,192 @@ const i18n = {
     'about.title': 'Sobre Nós',
     'about.text': 'FlashMail é um serviço de e-mail descartável. Sem login, sem rastreio. Só privacidade.',
     'privacy.title': 'Política de Privacidade',
-    'privacy.text': '',
+    'privacy.text': `Vigente a partir de: 7 de maio de 2025
+
+Sem cookies. Não utilizamos cookies nem armazenamos dados no navegador.
+Sem dados pessoais. Não coletamos ou armazenamos nenhuma informação pessoal.
+Mensagens temporárias. Os e-mails duram 20 minutos e são autodestruídos.
+Apenas anúncios. Mostramos anúncios de terceiros para manter o FlashMail gratuito—sem rastreadores, sem perfilamento.
+Sem rastreamento. Não registramos sua atividade além de logs básicos de erro/abuso.
+É isso. Aproveite sua privacidade. 🚀`,
     'toast.newMessage': 'Nova mensagem recebida',
     'btn.close': 'Encerrar Caixa',
     'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
   },
-'es': {
-  title: 'FlashMail',
-  'header.title': 'Tu servicio de correo temporal más sencillo.',
-  'nav.mailbox': 'Bandeja',
-  'nav.faq': 'Preguntas',
-  'nav.about': 'Acerca de',
-  'nav.privacy': 'Privacidad',
-  'btn.create': 'Crear bandeja',
-  'inbox.label': 'Tu correo:',
-  'inbox.expires': 'Expira en 20 minutos.',
-  'support.title': '¿Te gustó nuestro servicio?',
-  'support.text': 'Considera apoyarnos con el botón de abajo.',
-  'faq.title': 'Preguntas Frecuentes',
-  'faq.q1': '¿Cuánto tiempo está activa la bandeja de entrada?',
-  'faq.a1': 'Cada bandeja está activa por 20 minutos y luego se elimina automáticamente.',
-  'faq.q2': '¿Puedo extender el tiempo?',
-  'faq.a2': 'Sí, haz clic en “Crear bandeja” antes de que expire.',
-  'faq.q3': '¿Almacenan datos personales?',
-  'faq.a3': 'No. No se requiere registro ni se almacenan datos personales.',
-  'faq.q4': '¿El servicio es gratuito?',
-  'faq.a4': 'Sí, completamente gratuito y financiado con anuncios.',
-  'faq.q5': '¿Hay límites de uso?',
-  'faq.a5': 'No. Puedes crear tantas bandejas como quieras.',
-  'about.title': 'Acerca de Nosotros',
-  'about.text': 'FlashMail es un servicio de correo desechable. Sin registros, sin seguimiento. Solo privacidad.',
-  'privacy.title': 'Política de Privacidad',
-  'privacy.text': '',
-  'toast.newMessage': 'Nuevo mensaje recibido',
-  'btn.close': 'Cerrar bandeja',
-  'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
-  'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
-}
-'fr': {
-  title: 'FlashMail',
-  'header.title': 'Votre service d’e-mail temporaire le plus simple.',
-  'nav.mailbox': 'Boîte de réception',
-  'nav.faq': 'FAQ',
-  'nav.about': 'À propos',
-  'nav.privacy': 'Confidentialité',
-  'btn.create': 'Créer une boîte',
-  'inbox.label': 'Votre e-mail :',
-  'inbox.expires': 'Expire dans 20 minutes.',
-  'support.title': 'Vous aimez notre service ?',
-  'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci-dessous.',
-  'faq.title': 'Foire aux questions',
-  'faq.q1': 'Combien de temps la boîte de réception reste-t-elle active ?',
-  'faq.a1': 'Chaque boîte est active pendant 20 minutes, puis les messages sont supprimés.',
-  'faq.q2': 'Puis-je prolonger la durée ?',
-  'faq.a2': 'Oui — cliquez sur “Créer une boîte” avant l’expiration.',
-  'faq.q3': 'Enregistrez-vous des données personnelles ?',
-  'faq.a3': 'Non. Aucune inscription ni collecte de données personnelles.',
-  'faq.q4': 'Le service est-il gratuit ?',
-  'faq.a4': 'Oui, totalement gratuit et financé par la publicité.',
-  'faq.q5': 'Y a-t-il une limite d’utilisation ?',
-  'faq.a5': 'Non. Vous pouvez créer autant de boîtes que vous le souhaitez.',
-  'about.title': 'À propos de nous',
-  'about.text': 'FlashMail est un service de messagerie jetable. Pas d’inscription, pas de suivi. Juste de la confidentialité.',
-  'privacy.title': 'Politique de confidentialité',
-  'privacy.text': '',
-  'toast.newMessage': 'Nouveau message reçu',
-  'btn.close': 'Fermer la boîte',
-  'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
-  'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
-}
-'de': {
-  title: 'FlashMail',
-  'header.title': 'Ihr einfachster temporärer E-Mail-Dienst.',
-  'nav.mailbox': 'Posteingang',
-  'nav.faq': 'FAQ',
-  'nav.about': 'Über uns',
-  'nav.privacy': 'Datenschutz',
-  'btn.create': 'Postfach erstellen',
-  'inbox.label': 'Ihre E-Mail:',
-  'inbox.expires': 'Läuft in 20 Minuten ab.',
-  'support.title': 'Hat Ihnen unser Service gefallen?',
-  'support.text': 'Bitte unterstützen Sie uns über den Button unten.',
-  'faq.title': 'Häufig gestellte Fragen',
-  'faq.q1': 'Wie lange ist das Postfach aktiv?',
-  'faq.a1': 'Jedes Postfach ist standardmäßig 20 Minuten lang aktiv, danach werden alle Nachrichten gelöscht.',
-  'faq.q2': 'Kann ich die Zeit verlängern?',
-  'faq.a2': 'Ja — klicken Sie erneut auf „Postfach erstellen“, bevor es abläuft.',
-  'faq.q3': 'Werden persönliche Daten gespeichert?',
-  'faq.a3': 'Nein. Es ist keine Registrierung erforderlich und es werden keine Daten gespeichert.',
-  'faq.q4': 'Ist der Service kostenlos?',
-  'faq.a4': 'Ja, vollkommen kostenlos und werbefinanziert.',
-  'faq.q5': 'Gibt es Nutzungseinschränkungen?',
-  'faq.a5': 'Nein. Sie können beliebig viele Postfächer erstellen.',
-  'about.title': 'Über uns',
-  'about.text': 'FlashMail ist ein temporärer E-Mail-Dienst. Kein Login, kein Tracking – nur Privatsphäre.',
-  'privacy.title': 'Datenschutzerklärung',
-  'privacy.text': '',
-  'toast.newMessage': 'Neue Nachricht erhalten',
-  'btn.close': 'Postfach schließen',
-  'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
-  'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen?'
-  } 
-},
-'ru': {
-  title: 'FlashMail',
-  'header.title': 'Самый простой сервис временной электронной почты.',
-  'nav.mailbox': 'Входящие',
-  'nav.faq': 'FAQ',
-  'nav.about': 'О нас',
-  'nav.privacy': 'Конфиденциальность',
-  'btn.create': 'Создать ящик',
-  'inbox.label': 'Ваш e-mail:',
-  'inbox.expires': 'Срок действия — 20 минут.',
-  'support.title': 'Понравился наш сервис?',
-  'support.text': 'Поддержите нас, нажав на кнопку ниже.',
-  'faq.title': 'Часто задаваемые вопросы',
-  'faq.q1': 'Сколько действует адрес электронной почты?',
-  'faq.a1': 'Каждый ящик работает 20 минут, затем все сообщения удаляются.',
-  'faq.q2': 'Можно ли продлить срок?',
-  'faq.a2': 'Да — нажмите «Создать ящик» ещё раз до окончания срока.',
-  'faq.q3': 'Вы сохраняете личные данные?',
-  'faq.a3': 'Нет. Регистрация не требуется, данные не сохраняются.',
-  'faq.q4': 'Сервис действительно бесплатный?',
-  'faq.a4': 'Да, полностью бесплатный и поддерживается за счёт рекламы.',
-  'faq.q5': 'Есть ли ограничения на использование?',
-  'faq.a5': 'Нет. Можно создавать неограниченное количество ящиков.',
-  'about.title': 'О нас',
-  'about.text': 'FlashMail — это одноразовая электронная почта. Без регистрации, без слежки. Только конфиденциальность.',
-  'privacy.title': 'Политика конфиденциальности',
-  'privacy.text': '',
-  'toast.newMessage': 'Получено новое сообщение',
-  'btn.close': 'Закрыть ящик',
-  'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
-  'confirm.close': 'Закрыть ящик и удалить все сообщения?'
+
+  es: {
+    title: 'FlashMail',
+    'header.title': 'Tu servicio de correo temporal más sencillo.',
+    'nav.mailbox': 'Bandeja',
+    'nav.faq': 'Preguntas',
+    'nav.about': 'Acerca de',
+    'nav.privacy': 'Privacidad',
+    'btn.create': 'Crear bandeja',
+    'inbox.label': 'Tu correo:',
+    'inbox.expires': 'Expira en 20 minutos.',
+    'support.title': '¿Te gustó nuestro servicio?',
+    'support.text': 'Considera apoyarnos con el botón de abajo.',
+    'faq.title': 'Preguntas Frecuentes',
+    'faq.q1': '¿Cuánto tiempo está activa la bandeja de entrada?',
+    'faq.a1': 'Cada bandeja está activa por 20 minutos y luego se elimina automáticamente.',
+    'faq.q2': '¿Puedo extender el tiempo?',
+    'faq.a2': 'Sí, haz clic en “Crear bandeja” antes de que expire.',
+    'faq.q3': '¿Almacenan datos personales?',
+    'faq.a3': 'No. No se requiere registro ni se almacenan datos personales.',
+    'faq.q4': '¿El servicio es gratuito?',
+    'faq.a4': 'Sí, completamente gratuito y financiado con anuncios.',
+    'faq.q5': '¿Hay límites de uso?',
+    'faq.a5': 'No. Puedes crear tantas bandejas como quieras.',
+    'about.title': 'Acerca de Nosotros',
+    'about.text': 'FlashMail es un servicio de correo desechable. Sin registros, sin seguimiento. Solo privacidad.',
+    'privacy.title': 'Política de Privacidad',
+    'privacy.text': `Fecha de vigencia: 7 de mayo de 2025
+
+Sin cookies. No usamos cookies ni almacenamiento en el navegador.
+Sin datos personales. No recopilamos ni almacenamos información personal.
+Mensajes temporales. Los correos duran 20 minutos y luego se eliminan.
+Solo anuncios. Mostramos anuncios de terceros para mantener FlashMail gratuito—sin rastreadores ni perfiles.
+Sin seguimiento. No registramos tu actividad, salvo errores básicos o abusos.
+Eso es todo. Disfruta tu privacidad. 🚀`,
+    'toast.newMessage': 'Nuevo mensaje recibido',
+    'btn.close': 'Cerrar bandeja',
+    'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
+    'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
+  },
+
+  fr: {
+    title: 'FlashMail',
+    'header.title': 'Votre service d’e-mail temporaire le plus simple.',
+    'nav.mailbox': 'Boîte de réception',
+    'nav.faq': 'FAQ',
+    'nav.about': 'À propos',
+    'nav.privacy': 'Confidentialité',
+    'btn.create': 'Créer une boîte',
+    'inbox.label': 'Votre e-mail :',
+    'inbox.expires': 'Expire dans 20 minutes.',
+    'support.title': 'Vous aimez notre service ?',
+    'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci-dessous.',
+    'faq.title': 'Foire aux questions',
+    'faq.q1': 'Combien de temps la boîte de réception reste-t-elle active ?',
+    'faq.a1': 'Chaque boîte est active pendant 20 minutes, puis les messages sont supprimés.',
+    'faq.q2': 'Puis-je prolonger la durée ?',
+    'faq.a2': 'Oui — cliquez sur “Créer une boîte” avant l’expiration.',
+    'faq.q3': 'Enregistrez-vous des données personnelles ?',
+    'faq.a3': 'Non. Aucune inscription ni collecte de données personnelles.',
+    'faq.q4': 'Le service est-il gratuit ?',
+    'faq.a4': 'Oui, totalement gratuit et financé par la publicité.',
+    'faq.q5': 'Y a-t-il une limite d’utilisation ?',
+    'faq.a5': 'Non. Vous pouvez créer autant de boîtes que vous le souhaitez.',
+    'about.title': 'À propos de nous',
+    'about.text': 'FlashMail est un service de messagerie jetable. Pas d’inscription, pas de suivi. Juste de la confidentialité.',
+    'privacy.title': 'Politique de confidentialité',
+    'privacy.text': `Date d’effet : 7 mai 2025
+
+Aucun cookie. Nous n’utilisons pas de cookies ni de stockage local.
+Aucune donnée personnelle. Nous ne collectons ni ne stockons d’informations personnelles.
+Messages temporaires. Les e-mails durent 20 minutes puis sont supprimés.
+Uniquement des publicités. Nous affichons des publicités tierces pour garder FlashMail gratuit — sans traceurs, sans profilage.
+Aucun suivi. Nous n’enregistrons pas votre activité, à l’exception de journaux d’erreur ou d’abus.
+C’est tout. Profitez de votre vie privée. 🚀`,
+    'toast.newMessage': 'Nouveau message reçu',
+    'btn.close': 'Fermer la boîte',
+    'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
+    'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
+  },
+
+  de: {
+    title: 'FlashMail',
+    'header.title': 'Ihr einfachster temporärer E-Mail-Dienst.',
+    'nav.mailbox': 'Posteingang',
+    'nav.faq': 'FAQ',
+    'nav.about': 'Über uns',
+    'nav.privacy': 'Datenschutz',
+    'btn.create': 'Postfach erstellen',
+    'inbox.label': 'Ihre E-Mail:',
+    'inbox.expires': 'Läuft in 20 Minuten ab.',
+    'support.title': 'Hat Ihnen unser Service gefallen?',
+    'support.text': 'Bitte unterstützen Sie uns über den Button unten.',
+    'faq.title': 'Häufig gestellte Fragen',
+    'faq.q1': 'Wie lange ist das Postfach aktiv?',
+    'faq.a1': 'Jedes Postfach ist 20 Minuten lang aktiv und wird dann gelöscht.',
+    'faq.q2': 'Kann ich die Zeit verlängern?',
+    'faq.a2': 'Ja — klicken Sie erneut auf „Postfach erstellen“, bevor es abläuft.',
+    'faq.q3': 'Speichern Sie persönliche Daten?',
+    'faq.a3': 'Nein. Keine Registrierung erforderlich, keine Datenspeicherung.',
+    'faq.q4': 'Ist der Service kostenlos?',
+    'faq.a4': 'Ja, völlig kostenlos und werbefinanziert.',
+    'faq.q5': 'Gibt es Nutzungseinschränkungen?',
+    'faq.a5': 'Nein. Sie können beliebig viele Postfächer erstellen.',
+    'about.title': 'Über uns',
+    'about.text': 'FlashMail ist ein temporärer E-Mail-Dienst. Kein Login, kein Tracking – nur Privatsphäre.',
+    'privacy.title': 'Datenschutzerklärung',
+    'privacy.text': `Gültig ab: 7. Mai 2025
+
+Keine Cookies. Wir verwenden keine Cookies oder lokalen Speicher.
+Keine persönlichen Daten. Wir erfassen oder speichern keine persönlichen Informationen.
+Temporäre Nachrichten. E-Mails leben 20 Minuten und werden dann gelöscht.
+Nur Werbung. Wir zeigen Drittanbieter-Werbung ohne Tracker oder Profilbildung.
+Kein Tracking. Wir protokollieren Ihre Aktivitäten nicht, außer bei Fehlern oder Missbrauch.
+Das war's. Genießen Sie Ihre Privatsphäre. 🚀`,
+    'toast.newMessage': 'Neue Nachricht erhalten',
+    'btn.close': 'Postfach schließen',
+    'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
+    'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen?'
+  },
+
+  ru: {
+    title: 'FlashMail',
+    'header.title': 'Самый простой сервис временной электронной почты.',
+    'nav.mailbox': 'Входящие',
+    'nav.faq': 'FAQ',
+    'nav.about': 'О нас',
+    'nav.privacy': 'Конфиденциальность',
+    'btn.create': 'Создать ящик',
+    'inbox.label': 'Ваш e-mail:',
+    'inbox.expires': 'Срок действия — 20 минут.',
+    'support.title': 'Понравился наш сервис?',
+    'support.text': 'Поддержите нас, нажав на кнопку ниже.',
+    'faq.title': 'Часто задаваемые вопросы',
+    'faq.q1': 'Сколько действует адрес электронной почты?',
+    'faq.a1': 'Каждый ящик работает 20 минут, затем все сообщения удаляются.',
+    'faq.q2': 'Можно ли продлить срок?',
+    'faq.a2': 'Да — нажмите «Создать ящик» ещё раз до окончания срока.',
+    'faq.q3': 'Вы сохраняете личные данные?',
+    'faq.a3': 'Нет. Регистрация не требуется, данные не сохраняются.',
+    'faq.q4': 'Сервис действительно бесплатный?',
+    'faq.a4': 'Да, полностью бесплатный и поддерживается за счёт рекламы.',
+    'faq.q5': 'Есть ли ограничения на использование?',
+    'faq.a5': 'Нет. Можно создавать неограниченное количество ящиков.',
+    'about.title': 'О нас',
+    'about.text': 'FlashMail — это одноразовая электронная почта. Без регистрации, без слежки. Только конфиденциальность.',
+    'privacy.title': 'Политика конфиденциальности',
+    'privacy.text': `Дата вступления в силу: 7 мая 2025 года
+
+Без куки. Мы не используем куки и не сохраняем данные в браузере.
+Без личных данных. Мы не собираем и не храним никакую личную информацию.
+Временные сообщения. Сообщения удаляются через 20 минут.
+Только реклама. Мы показываем рекламу без трекеров и профилирования.
+Без отслеживания. Мы не ведём журналы активности, кроме ошибок и злоупотреблений.
+Вот и всё. Наслаждайтесь конфиденциальностью. 🚀`,
+    'toast.newMessage': 'Получено новое сообщение',
+    'btn.close': 'Закрыть ящик',
+    'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
+    'confirm.close': 'Закрыть ящик и удалить все сообщения?'
   }
-},
+};
+
 // Locale helpers
 function getLocale(code) {
   return i18n[code] ? code : 'en';
 }
 let savedLang = localStorage.getItem('flashmail-lang') || 'en';
 let locale    = getLocale(savedLang);
+
 function t(key) {
   return i18n[locale]?.[key] || i18n.en[key] || '';
 }
+
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const txt = t(el.getAttribute('data-i18n'));
