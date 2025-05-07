@@ -306,6 +306,19 @@ function showToast() {
   toast.classList.remove('hidden');
   toast.classList.add('show');
 }
+/* copy-to‑clipboard ---------------------------------------------------*/
+function copyEmail(){
+  const addr=document.getElementById('email-address').textContent;
+  if(!addr) return;
+  navigator.clipboard.writeText(addr).then(showCopiedToast);
+}
+function showCopiedToast(){
+  const toast=document.getElementById('toast');
+  toast.textContent='Copied!';          // simples e curto
+  toast.classList.remove('hidden');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),1500);
+}
 
 /* -------------------------------------------------------------- */
 /*  Tab navigation (untouched)                                    */
@@ -461,6 +474,7 @@ document.getElementById('btn-create').addEventListener('click', () => {
   resetTimers();
 
   /* UI initialisation */
+  document.getElementById('btn-copy').onclick = copyEmail;
   document.getElementById('btn-create').classList.add('hidden');
   document.getElementById('closed-msg').classList.add   ('hidden');
   document.getElementById('btn-close' ).classList.remove('hidden');
