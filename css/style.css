@@ -1,5 +1,4 @@
 :root {
-    /* Paleta baseada em estudos de retenção: azul confiança, laranja ação */
     --color-primary: #0052cc;
     --color-secondary: #ffffff;
     --color-accent: #ff8c00;
@@ -9,7 +8,7 @@
     --radius: 8px;
   }
   
-  /* Reset básico */
+  
   * { margin: 0; padding: 0; box-sizing: border-box; }
   
   body {
@@ -117,3 +116,41 @@
     color: var(--text-dark);
     font-size: 0.9rem;
   }
+.coffee-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.coffee-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  max-width: 320px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.coffee-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.coffee-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #1a202c; /* ajuste conforme sua paleta */
+}
+
+.coffee-card p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #4a5568;
+}
+
+.coffee-button img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
