@@ -356,7 +356,7 @@ function escapeHTML(str) {
   return div.innerHTML;
 }
 
-// Toast notification
+// toast pop‑up
 function showToast() {
   const toast = document.getElementById('toast');
   if (!toast) return;
@@ -369,7 +369,7 @@ function showToast() {
   }, 3000);
 }
 
-// Timer
+// countdown timer (20 min)
 let remaining, timerInterval;
 function startTimer() {
   remaining = CONFIG.autoStopAfter / 1000;
@@ -383,17 +383,17 @@ function startTimer() {
   }, 1000);
 }
 function formatTime(sec) {
-  const m = String(Math.floor(sec/60)).padStart(2, '0');
+  const m = String(Math.floor(sec / 60)).padStart(2, '0');
   const s = String(sec % 60).padStart(2, '0');
   return `${m}:${s}`;
 }
 
-// Close inbox
 function clearInbox() {
   inboxActive = false;
   clearInterval(window._poller);
   clearTimeout(window._stopPoll);
   clearInterval(timerInterval);
+
   document.getElementById('inbox').classList.add('hidden');
   document.getElementById('btn-close').classList.add('hidden');
   document.getElementById('timer').classList.add('hidden');
@@ -401,10 +401,10 @@ function clearInbox() {
   document.getElementById('closed-msg').classList.remove('hidden');
 }
 
-// Render messages with summary/detail toggle
 function renderMessages(msgs, inboxId) {
   const container = document.getElementById('messages');
   container.innerHTML = '';
+
   msgs.forEach(msg => {
     const summary = document.createElement('div');
     summary.className = 'message-summary';
@@ -412,13 +412,14 @@ function renderMessages(msgs, inboxId) {
       <span><strong>${escapeHTML(msg.subject || '(no subject)')}</strong> — ${escapeHTML(msg.sender)}</span>
       <span>▼</span>
     `;
+
     summary.onclick = () => {
       const detail = document.createElement('div');
       detail.className = 'message-detail';
       detail.innerHTML = `
         <h3>${escapeHTML(msg.subject || '(no subject)')}</h3>
         <p><em>From: ${escapeHTML(msg.sender)}</em></p>
-        <p>${escapeHTML(msg.body).replace(/\n/g,'<br>')}</p>
+        <p>${escapeHTML(msg.body).replace(/\n/g, '<br>')}</p>
         <div class="msg-actions">
           <button class="btn-reply">Responder</button>
           <button class="btn-forward">Encaminhar</button>
@@ -426,54 +427,60 @@ function renderMessages(msgs, inboxId) {
         </div>
       `;
       detail.querySelector('.btn-reply').onclick = () => {
-        window.location.href =
-          `mailto:${msg.sender}` +
-          `?subject=${encodeURIComponent('Re: ' + (msg.subject||''))}` +
-          `&body=${encodeURIComponent('\n\n---\n' + msg.body)}`;
+        window.location.href = `mailto:${msg.sender}?subject=${encodeURIComponent(
+          'Re: ' + (msg.subject || '')
+        )}&body=${encodeURIComponent('\n\n---\n' + msg.body)}`;
       };
       detail.querySelector('.btn-forward').onclick = () => {
         const to = prompt('Encaminhar para:');
         if (!to) return;
-        window.location.href =
-          `mailto:${to}` +
-          `?subject=${encodeURIComponent('Fwd: ' + (msg.subject||''))}` +
-          `&body=${encodeURIComponent('De: '+msg.sender+'\n\n'+msg.body)}`;
+        window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+          'Fwd: ' + (msg.subject || '')
+        )}&body=${encodeURIComponent('De: ' + msg.sender + '\n\n' + msg.body)}`;
       };
-      detail.querySelector('.btn-delete').onclick = () => {
-        detail.remove();
-      };
+      detail.querySelector('.btn-delete').onclick = () => detail.remove();
+
       summary.replaceWith(detail);
       detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
+
     container.appendChild(summary);
   });
 }
 
-// Create inbox & start polling
 let lastCount = 0;
+
 document.getElementById('btn-create').addEventListener('click', () => {
-  if (inboxActive) return;   
+  if (inboxActive) return;             // prevents multiple inboxes
   inboxActive = true;
 
+  // reset UI
   document.getElementById('closed-msg').classList.add('hidden');
   document.getElementById('btn-close').classList.remove('hidden');
   document.getElementById('messages').innerHTML = '';
 
+  // generate address
   const inboxId = makeInboxId();
-  document.getElementById('email-address').textContent = `${inboxId}@${CONFIG.inboxDomain}`;
+  document.getElementById('email-address').textContent =
+    `${inboxId}@${CONFIG.inboxDomain}`;
   document.getElementById('inbox').classList.remove('hidden');
 
+  // reset previous timers / pollers
   clearInterval(window._poller);
   clearTimeout(window._stopPoll);
   clearInterval(timerInterval);
 
+  // start 20‑min timer
   startTimer();
   lastCount = 0;
+
+  // start polling API
   window._poller = setInterval(async () => {
     try {
       const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
       if (!res.ok) throw new Error(res.status);
       const msgs = await res.json();
+
       if (msgs.length > lastCount) {
         showToast();
         lastCount = msgs.length;
@@ -483,7 +490,16 @@ document.getElementById('btn-create').addEventListener('click', () => {
       console.warn('Polling error (ignored):', err);
     }
   }, CONFIG.pollInterval);
+
+  // auto‑close after 20 min
   window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
+});
+
+/* ---------- manual close ---------- */
+
+document.getElementById('btn-close').addEventListener('click', () => {
+  const msg = t('confirm.close');
+  if (window.confirm(msg)) clearInbox();
 });
 
   window._poller = setInterval(async () => {
