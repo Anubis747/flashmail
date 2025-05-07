@@ -329,3 +329,13 @@ body {
 }
 .copy-btn:hover{opacity:.85;}
 .copy-btn:active{opacity:.7;}
+.btn-danger{
+  background:#d9534f;
+  color:#fff;
+  padding:0.75rem 1.5rem;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-danger:hover{ background:#c9302c; }
