@@ -6,20 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="title">FlashMail</title>
 
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy"
-        content="
-          default-src 'self';
-          base-uri 'self';
-          form-action 'self';
-          block-all-mixed-content;
-          connect-src 'self';
-          script-src 'self' 'unsafe-inline';
-          style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-          img-src 'self' data: https://img.buymeacoffee.com;
-          font-src https://fonts.gstatic.com;
-          frame-src 'self';
-        ">
+<meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        base-uri 'self';
+        form-action 'self';
+        block-all-mixed-content;
+        connect-src 'self' https://api.flashmail.win;
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+        img-src 'self' data: https://img.buymeacoffee.com;
+        font-src https://fonts.gstatic.com;
+        frame-src 'self';
+      ">
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,17 +58,15 @@
     </section>
 
     <!-- Language Selector (minimal) -->
-    <div class="lang-inline">
-      <label for="lang-select" class="sr-only">Language</label>
-      <select id="lang-select" aria-label="Select language">
-        <option value="en">English</option>
-        <option value="pt">Português</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-        <option value="ru">Русский</option>
-      </select>
-    </div>
+<label for="lang-select" class="sr-only">Language</label>
+<select id="lang-select" aria-label="Select language">
+  <option value="en">English</option>
+  <option value="pt">Português</option>
+  <option value="es">Español</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+  <option value="ru">Русский</option>
+</select>
 
     <!-- Support -->
     <section class="card coffee-section">
