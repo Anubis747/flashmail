@@ -1,7 +1,7 @@
 // script.js
 const CONFIG = {
   idPrefix: 'flash',
-  idLength: 5,
+  idLength: 2,
   pollInterval: 5000,
   autoStopAfter: 20 * 60 * 1000,
   apiBase: 'https://api.flashmail.win',
@@ -300,7 +300,6 @@ applyTranslations();
 /*  UI helpers                                                    */
 /* ============================================================== */
 
-/* simple toast that hides on click or after 5 s */
 function showToast() {
   const toast = document.getElementById('toast');
   if (!toast) return;
@@ -309,14 +308,12 @@ function showToast() {
   toast.classList.remove('hidden');
   toast.classList.add('show');
 
-  const autoHide = setTimeout(hide, 5_000);
-  toast.onclick  = () => { clearTimeout(autoHide); hide(); };
-
-  function hide() {
+  // click = close
+  toast.onclick = () => {
     toast.classList.remove('show');
     toast.classList.add('hidden');
-    toast.onclick = null;
-  }
+    toast.onclick = null;        // detach handler
+  };
 }
 
 /* -------------------------------------------------------------- */
