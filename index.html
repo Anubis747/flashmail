@@ -52,11 +52,12 @@
     <button id="btn-create" class="btn-primary" data-i18n="btn.create">Create Inbox</button>
     <button id="btn-close" class="btn-secondary hidden" data-i18n="btn.close">Close Inbox</button>
     <p id="timer" class="timer hidden">20:00</p>
-    <div id="inbox" class="inbox hidden">
-      <p class="inbox-label" data-i18n="inbox.label">Your email:</p>
-      <code id="email-address" class="email-code"></code>
-      <div id="messages" class="message-list"></div>
-    </div>
+<p class="inbox-label" data-i18n="inbox.label">Your email:</p>
+<div class="email-row">
+  <code id="email-address" class="email-code"></code>
+  <button id="btn-copy" title="Copy" aria-label="Copy address" class="copy-btn">📋</button>
+</div>
+
     <p id="closed-msg" class="closed-msg hidden" data-i18n="inbox.closed">
       Inbox closed. All messages deleted.
     </p>
