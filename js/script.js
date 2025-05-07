@@ -178,15 +178,12 @@ const i18n = {
     'privacy.text': ''
   }
 };
-
+// Locale helpers
 function getLocale(code) {
-  if (code === 'auto') {
-    const b = navigator.language.slice(0,2);
-    return i18n[b] ? b : 'en';
-  }
   return i18n[code] ? code : 'en';
 }
-let savedLang = localStorage.getItem('flashmail-lang') || 'auto';
+
+let savedLang = localStorage.getItem('flashmail-lang') || 'en';
 let locale    = getLocale(savedLang);
 
 function t(key) {
@@ -212,67 +209,75 @@ if (langSelect) {
 }
 applyTranslations();
 
-// Tabs
-const tabs      = document.querySelectorAll('.main-nav .tab');
-const sections  = document.querySelectorAll('.content, .inbox');
-function showSection(id) {
+// Tab navigation
+const tabs     = document.querySelectorAll('.main-nav .tab');
+const sections = document.querySelectorAll('.content, .inbox');
+
+function showSection(id, scroll = false) {
   sections.forEach(s => s.classList.add('hidden'));
+
   if (id === 'mailbox-area') {
     document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
   }
-  const sec = document.getElementById(id);
-  if (sec) {
-    sec.classList.remove('hidden');
-    setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.remove('hidden');
+    if (scroll) {
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
   }
+
   tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
+
 tabs.forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
     const tgt = tab.dataset.target;
-    history.replaceState(null,'',`#${tgt}`);
-    showSection(tgt);
+    history.replaceState(null, '', `#${tgt}`);
+    showSection(tgt, true);
   });
 });
-showSection(location.hash.slice(1) || 'mailbox-area');
+
+const initial = location.hash.slice(1) || 'mailbox-area';
+showSection(initial);
 
 // Dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Gera IDs tipo 'flash1234'
+// Inbox ID generator
 function makeInboxId() {
   const num = Math.floor(Math.random() * Math.pow(10, CONFIG.idLength));
   return CONFIG.idPrefix + String(num).padStart(CONFIG.idLength, '0');
 }
 
-// Cria inbox & inicia polling
+// Create inbox & polling
 document.getElementById('btn-create').addEventListener('click', () => {
   const inboxId  = makeInboxId();
   const emailEl  = document.getElementById('email-address');
   const inboxEl  = document.getElementById('inbox');
   const listEl   = document.getElementById('messages');
 
-  const emailAddr = `${inboxId}@${CONFIG.inboxDomain}`;
-  emailEl.textContent = emailAddr;
+  emailEl.textContent = `${inboxId}@${CONFIG.inboxDomain}`;
   inboxEl.classList.remove('hidden');
 
-  // limpa polls anteriores
-  if (window._poller)  clearInterval(window._poller);
+  if (window._poller)   clearInterval(window._poller);
   if (window._stopPoll) clearTimeout(window._stopPoll);
 
-  // polling a cada CONFIG.pollInterval
   window._poller = setInterval(async () => {
     try {
       const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
       if (!res.ok) throw new Error(res.status);
       const messages = await res.json();
-      listEl.innerHTML = '';
 
-      if (!messages.length) {
+      listEl.innerHTML = '';
+      if (messages.length === 0) {
         listEl.innerHTML = `<li>${ t('inbox.noMessages') || 'No messages yet.' }</li>`;
       } else {
-        for (const msg of messages) {
+        messages.forEach(msg => {
           const li = document.createElement('li');
           li.innerHTML = `
             <strong>${ msg.subject || '(no subject)' }</strong><br>
@@ -280,13 +285,12 @@ document.getElementById('btn-create').addEventListener('click', () => {
             <div>${ (msg.body || '').replace(/\n/g,'<br>') }</div>
           `;
           listEl.appendChild(li);
-        }
+        });
       }
     } catch (err) {
       console.error('Polling error', err);
     }
   }, CONFIG.pollInterval);
 
-  // parar polling após CONFIG.autoStopAfter
   window._stopPoll = setTimeout(() => clearInterval(window._poller), CONFIG.autoStopAfter);
 });
