@@ -222,7 +222,8 @@ body {
   border: 0;
 }
 .lang-inline {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin: -1rem 0 2rem 0;
 }
 
@@ -236,3 +237,4 @@ body {
   color: var(--text-dark);
   cursor: pointer;
 }
+
