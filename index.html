@@ -49,19 +49,52 @@
 
 <main class="container">
   <section id="mailbox-area" class="card">
-    <button id="btn-create" class="btn-primary" data-i18n="btn.create">Create Inbox</button>
-    <button id="btn-close" class="btn-secondary hidden" data-i18n="btn.close">Close Inbox</button>
-    <p id="timer" class="timer hidden">20:00</p>
-<p class="inbox-label" data-i18n="inbox.label">Your email:</p>
-<div class="email-row">
-  <code id="email-address" class="email-code"></code>
-  <button id="btn-copy" title="Copy" aria-label="Copy address" class="copy-btn">📋</button>
-</div>
 
-    <p id="closed-msg" class="closed-msg hidden" data-i18n="inbox.closed">
+    <!-- Create button (shown before the inbox is started) -->
+    <button id="btn-create"
+            class="btn-primary"
+            data-i18n="btn.create">
+      Create Inbox
+    </button>
+
+    <!-- Close button (red, hidden until an inbox is active) -->
+    <button id="btn-close"
+            class="btn-danger hidden"
+            data-i18n="btn.close">
+      Close Inbox
+    </button>
+
+    <!-- 20‑minute countdown -->
+    <p id="timer" class="timer hidden">20:00</p>
+
+    <!-- Everything related to the active inbox lives inside #inbox -->
+    <div id="inbox" class="inbox hidden">
+
+      <!-- E‑mail address label -->
+      <p class="inbox-label" data-i18n="inbox.label">Your email:</p>
+
+      <!-- Address + copy‑to‑clipboard button -->
+      <div class="email-row">
+        <code id="email-address" class="email-code"></code>
+        <button id="btn-copy"
+                type="button"
+                class="copy-btn"
+                title="Copy"
+                aria-label="Copy address">📋</button>
+      </div>
+
+      <!-- Message list is filled by the script -->
+      <div id="messages" class="message-list"></div>
+    </div>
+
+    <!-- Shown after the inbox is closed / time‑out -->
+    <p id="closed-msg"
+       class="closed-msg hidden"
+       data-i18n="inbox.closed">
       Inbox closed. All messages deleted.
     </p>
   </section>
+</main>
 
   <div class="lang-inline">
     <label for="lang-select" class="sr-only">Language</label>
