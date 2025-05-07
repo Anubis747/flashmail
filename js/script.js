@@ -6,6 +6,7 @@ const CONFIG = {
   apiBase: 'https://api.flashmail.win',
   inboxDomain: 'mg.flashmail.win'
 };
+let inboxActive = false;
 
 // i18n translations
 const i18n = {
@@ -281,6 +282,7 @@ function escapeHTML(str) {
 // Toast notification
 function showToast() {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.textContent = t('toast.newMessage');
   toast.classList.add('show');
   toast.classList.remove('hidden');
@@ -308,6 +310,7 @@ function formatTime(sec) {
 
 // Close inbox
 function clearInbox() {
+  inboxActive = false;
   clearInterval(window._poller);
   clearTimeout(window._stopPoll);
   clearInterval(timerInterval);
@@ -369,6 +372,9 @@ function renderMessages(msgs, inboxId) {
 // Create inbox & start polling
 let lastCount = 0;
 document.getElementById('btn-create').addEventListener('click', () => {
+  if (inboxActive) return; // Evita múltiplas caixas
+  inboxActive = true;
+
   document.getElementById('closed-msg').classList.add('hidden');
   document.getElementById('btn-close').classList.remove('hidden');
   document.getElementById('messages').innerHTML = '';
@@ -399,6 +405,7 @@ document.getElementById('btn-create').addEventListener('click', () => {
 
   window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
 });
+
 
 document.getElementById('btn-close').addEventListener('click', () => {
   const msg = t('confirm.close');
