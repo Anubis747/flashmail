@@ -182,14 +182,11 @@ const i18n = {
 function getLocale(code) {
   return i18n[code] ? code : 'en';
 }
-
 let savedLang = localStorage.getItem('flashmail-lang') || 'en';
 let locale    = getLocale(savedLang);
-
 function t(key) {
   return i18n[locale]?.[key] || i18n.en[key] || '';
 }
-
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const txt = t(el.getAttribute('data-i18n'));
@@ -212,14 +209,11 @@ applyTranslations();
 // Tab navigation
 const tabs     = document.querySelectorAll('.main-nav .tab');
 const sections = document.querySelectorAll('.content, .inbox');
-
 function showSection(id, scroll = false) {
   sections.forEach(s => s.classList.add('hidden'));
-
   if (id === 'mailbox-area') {
     document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
   }
-
   const section = document.getElementById(id);
   if (section) {
     section.classList.remove('hidden');
@@ -229,10 +223,8 @@ function showSection(id, scroll = false) {
       }, 50);
     }
   }
-
   tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
-
 tabs.forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
@@ -241,56 +233,148 @@ tabs.forEach(tab => {
     showSection(tgt, true);
   });
 });
-
-const initial = location.hash.slice(1) || 'mailbox-area';
-showSection(initial);
+showSection(location.hash.slice(1) || 'mailbox-area');
 
 // Dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Inbox ID generator
+// Helpers for inbox
 function makeInboxId() {
   const num = Math.floor(Math.random() * Math.pow(10, CONFIG.idLength));
   return CONFIG.idPrefix + String(num).padStart(CONFIG.idLength, '0');
 }
 
-// Create inbox & polling
+// XSS-safe escape
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Toast notification
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  toast.classList.remove('hidden');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Timer
+let remaining, timerInterval;
+function startTimer() {
+  remaining = CONFIG.autoStopAfter / 1000;
+  const timerEl = document.getElementById('timer');
+  timerEl.classList.remove('hidden');
+  timerEl.textContent = formatTime(remaining);
+  timerInterval = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) clearInbox();
+    timerEl.textContent = formatTime(remaining);
+  }, 1000);
+}
+function formatTime(sec) {
+  const m = String(Math.floor(sec/60)).padStart(2, '0');
+  const s = String(sec % 60).padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+// Close inbox
+function clearInbox() {
+  clearInterval(window._poller);
+  clearTimeout(window._stopPoll);
+  clearInterval(timerInterval);
+  document.getElementById('inbox').classList.add('hidden');
+  document.getElementById('btn-close').classList.add('hidden');
+  document.getElementById('timer').classList.add('hidden');
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('closed-msg').classList.remove('hidden');
+}
+
+// Render messages with summary/detail toggle
+function renderMessages(msgs, inboxId) {
+  const container = document.getElementById('messages');
+  container.innerHTML = '';
+  msgs.forEach(msg => {
+    const summary = document.createElement('div');
+    summary.className = 'message-summary';
+    summary.innerHTML = `
+      <span><strong>${escapeHTML(msg.subject || '(no subject)')}</strong> — ${escapeHTML(msg.sender)}</span>
+      <span>▼</span>
+    `;
+    summary.onclick = () => {
+      const detail = document.createElement('div');
+      detail.className = 'message-detail';
+      detail.innerHTML = `
+        <h3>${escapeHTML(msg.subject || '(no subject)')}</h3>
+        <p><em>From: ${escapeHTML(msg.sender)}</em></p>
+        <p>${escapeHTML(msg.body).replace(/\n/g,'<br>')}</p>
+        <div class="msg-actions">
+          <button class="btn-reply">Responder</button>
+          <button class="btn-forward">Encaminhar</button>
+          <button class="btn-delete">Excluir</button>
+        </div>
+      `;
+      detail.querySelector('.btn-reply').onclick = () => {
+        window.location.href =
+          `mailto:${msg.sender}` +
+          `?subject=${encodeURIComponent('Re: ' + (msg.subject||''))}` +
+          `&body=${encodeURIComponent('\n\n---\n' + msg.body)}`;
+      };
+      detail.querySelector('.btn-forward').onclick = () => {
+        const to = prompt('Encaminhar para:');
+        if (!to) return;
+        window.location.href =
+          `mailto:${to}` +
+          `?subject=${encodeURIComponent('Fwd: ' + (msg.subject||''))}` +
+          `&body=${encodeURIComponent('De: '+msg.sender+'\n\n'+msg.body)}`;
+      };
+      detail.querySelector('.btn-delete').onclick = () => {
+        detail.remove();
+      };
+      summary.replaceWith(detail);
+      detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    container.appendChild(summary);
+  });
+}
+
+// Create inbox & start polling
+let lastCount = 0;
 document.getElementById('btn-create').addEventListener('click', () => {
-  const inboxId  = makeInboxId();
-  const emailEl  = document.getElementById('email-address');
-  const inboxEl  = document.getElementById('inbox');
-  const listEl   = document.getElementById('messages');
+  document.getElementById('closed-msg').classList.add('hidden');
+  document.getElementById('btn-close').classList.remove('hidden');
+  document.getElementById('messages').innerHTML = '';
 
-  emailEl.textContent = `${inboxId}@${CONFIG.inboxDomain}`;
-  inboxEl.classList.remove('hidden');
+  const inboxId = makeInboxId();
+  document.getElementById('email-address').textContent = `${inboxId}@${CONFIG.inboxDomain}`;
+  document.getElementById('inbox').classList.remove('hidden');
 
-  if (window._poller)   clearInterval(window._poller);
-  if (window._stopPoll) clearTimeout(window._stopPoll);
+  clearInbox();
+  startTimer();
+  lastCount = 0;
 
   window._poller = setInterval(async () => {
     try {
       const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
       if (!res.ok) throw new Error(res.status);
-      const messages = await res.json();
+      const msgs = await res.json();
 
-      listEl.innerHTML = '';
-      if (messages.length === 0) {
-        listEl.innerHTML = `<li>${ t('inbox.noMessages') || 'No messages yet.' }</li>`;
-      } else {
-        messages.forEach(msg => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <strong>${ msg.subject || '(no subject)' }</strong><br>
-            <em>From: ${ msg.sender }</em><br>
-            <div>${ (msg.body || '').replace(/\n/g,'<br>') }</div>
-          `;
-          listEl.appendChild(li);
-        });
+      if (msgs.length > lastCount) {
+        showToast();
+        lastCount = msgs.length;
       }
+      renderMessages(msgs, inboxId);
     } catch (err) {
-      console.error('Polling error', err);
+      console.warn('Polling error (ignored):', err);
     }
   }, CONFIG.pollInterval);
 
-  window._stopPoll = setTimeout(() => clearInterval(window._poller), CONFIG.autoStopAfter);
+  window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
+});
+
+// Close inbox button
+document.getElementById('btn-close').addEventListener('click', () => {
+  if (window.confirm('Encerrar a inbox e apagar todas as mensagens?')) {
+    clearInbox();
+  }
 });
