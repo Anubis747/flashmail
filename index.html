@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">FlashMail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <text y='90' font-size='90'>✉️</text>
+  </svg>" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo" data-i18n="header.title">Your easiest temporary email service.</h1>
+      <nav class="main-nav">
+        <button class="tab" data-target="faq" data-i18n="nav.faq">FAQ</button>
+        <button class="tab" data-target="about" data-i18n="nav.about">About</button>
+        <button class="tab" data-target="privacy" data-i18n="nav.privacy">Privacy</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="mailbox-area" class="card">
+      <button id="btn-create" class="btn-primary" data-i18n="btn.create">Create Inbox</button>
+      <div id="inbox" class="inbox hidden">
+        <p class="inbox-label" data-i18n="inbox.label">Your email:</p>
+        <code id="email-address" class="email-code"></code>
+        <p class="inbox-expires" data-i18n="inbox.expires">Expires in 20 minutes.</p>
+        <ul id="messages" class="message-list"></ul>
+      </div>
+    </section>
+
+    <section id="faq" class="content hidden">
+      <h2 data-i18n="faq.title">FAQ</h2>
+      <ul>
+        <li>
+          <strong data-i18n="faq.q1">How long does the email last?</strong>
+          <p data-i18n="faq.a1">Email expires after 20 minutes by default.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="about" class="content hidden">
+      <h2 data-i18n="about.title">About</h2>
+      <p data-i18n="about.text">This service provides temporary inboxes for disposable use, helping protect your privacy and avoid spam.</p>
+    </section>
+
+    <section id="privacy" class="content hidden">
+      <h2 data-i18n="privacy.title">Privacy Policy</h2>
+      <p data-i18n="privacy.text">We do not store any data beyond expiration. No personal info is collected or shared.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> FlashMail</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
