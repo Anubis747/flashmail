@@ -263,8 +263,9 @@ const i18n = {
     'confirm.close': 'Закрыть ящик и удалить все сообщения?'
   }
 };
-
-// Locale helpers
+/* ============================================================== */
+/*  Locale / translation helpers                                  */
+/* ============================================================== */
 function getLocale(code) {
   return i18n[code] ? code : 'en';
 }
@@ -276,13 +277,14 @@ function t(key) {
 }
 
 function applyTranslations() {
+  /* Replace innerHTML of every element with a data‑i18n attribute */
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const txt = t(el.getAttribute('data-i18n'));
     if (txt) el.innerHTML = txt;
   });
 }
 
-// Language switcher
+/* language dropdown -------------------------------------------- */
 const langSelect = document.getElementById('lang-select');
 if (langSelect) {
   langSelect.value = savedLang;
@@ -294,26 +296,35 @@ if (langSelect) {
 }
 applyTranslations();
 
-// Tab navigation (sem alterações)
+/* ============================================================== */
+/*  UI helpers                                                    */
+/* ============================================================== */
 
-// Dynamic year
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Toast notification
+/* simple toast that hides on click or after 5 s */
 function showToast() {
   const toast = document.getElementById('toast');
   if (!toast) return;
+
+  toast.textContent = t('toast.newMessage');
   toast.classList.remove('hidden');
   toast.classList.add('show');
-  setTimeout(() => {
+
+  const autoHide = setTimeout(hide, 5_000);
+  toast.onclick  = () => { clearTimeout(autoHide); hide(); };
+
+  function hide() {
     toast.classList.remove('show');
     toast.classList.add('hidden');
-  }, 3000);
+    toast.onclick = null;
+  }
 }
 
-// Tab navigation
+/* -------------------------------------------------------------- */
+/*  Tab navigation (untouched)                                    */
+/* -------------------------------------------------------------- */
 const tabs     = document.querySelectorAll('.main-nav .tab');
 const sections = document.querySelectorAll('.content, .inbox');
+
 function showSection(id, scroll = false) {
   sections.forEach(s => s.classList.add('hidden'));
   if (id === 'mailbox-area') {
@@ -330,6 +341,7 @@ function showSection(id, scroll = false) {
   }
   tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
+
 tabs.forEach(tab => {
   tab.addEventListener('click', e => {
     e.preventDefault();
@@ -340,47 +352,38 @@ tabs.forEach(tab => {
 });
 showSection(location.hash.slice(1) || 'mailbox-area');
 
-// Dynamic year
+/* current year in footer */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Helpers for inbox
+/* ============================================================== */
+/*  Inbox helpers                                                 */
+/* ============================================================== */
 function makeInboxId() {
   const num = Math.floor(Math.random() * Math.pow(10, CONFIG.idLength));
   return CONFIG.idPrefix + String(num).padStart(CONFIG.idLength, '0');
 }
 
-// XSS-safe escape
 function escapeHTML(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
 
-// toast pop‑up
-function showToast() {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.textContent = t('toast.newMessage');
-  toast.classList.remove('hidden');
-  toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-    toast.classList.add('hidden');
-  }, 3000);
-}
-
-// countdown timer (20 min)
+/* -------------------------------------------------------------- */
+/*  Countdown timer (20 min)                                      */
+/* -------------------------------------------------------------- */
 let remaining, timerInterval;
 function startTimer() {
   remaining = CONFIG.autoStopAfter / 1000;
   const timerEl = document.getElementById('timer');
   timerEl.classList.remove('hidden');
   timerEl.textContent = formatTime(remaining);
+
   timerInterval = setInterval(() => {
     remaining--;
     if (remaining <= 0) clearInbox();
     timerEl.textContent = formatTime(remaining);
-  }, 1000);
+  }, 1_000);
 }
 function formatTime(sec) {
   const m = String(Math.floor(sec / 60)).padStart(2, '0');
@@ -388,144 +391,108 @@ function formatTime(sec) {
   return `${m}:${s}`;
 }
 
-function clearInbox() {
-  inboxActive = false;
-  clearInterval(window._poller);
-  clearTimeout(window._stopPoll);
-  clearInterval(timerInterval);
+/* ============================================================== */
+/*  Main logic                                                    */
+/* ============================================================== */
+let inboxActive   = false;  // prevents double create
+let lastCount     = 0;      // messages already shown
+let currentId     = null;   // active inbox id
 
-  document.getElementById('inbox').classList.add('hidden');
-  document.getElementById('btn-close').classList.add('hidden');
-  document.getElementById('timer').classList.add('hidden');
-  document.getElementById('messages').innerHTML = '';
-  document.getElementById('closed-msg').classList.remove('hidden');
+/* stop any running timers / intervals */
+function resetTimers() {
+  if (window._poller)   clearInterval(window._poller);
+  if (window._stopPoll) clearTimeout(window._stopPoll);
+  if (timerInterval)    clearInterval(timerInterval);
 }
 
-function renderMessages(msgs, inboxId) {
-  const container = document.getElementById('messages');
-  container.innerHTML = '';
+/* render message list                                            */
+function renderMessages(msgs) {
+  const box = document.getElementById('messages');
+  box.innerHTML = '';
 
   msgs.forEach(msg => {
-    const summary = document.createElement('div');
-    summary.className = 'message-summary';
-    summary.innerHTML = `
+    const line = document.createElement('div');
+    line.className = 'message-summary';
+    line.innerHTML = `
       <span><strong>${escapeHTML(msg.subject || '(no subject)')}</strong> — ${escapeHTML(msg.sender)}</span>
-      <span>▼</span>
-    `;
+      <span>▼</span>`;          // simple toggle
 
-    summary.onclick = () => {
+    /* on click → expand full body */
+    line.onclick = () => {
       const detail = document.createElement('div');
       detail.className = 'message-detail';
       detail.innerHTML = `
         <h3>${escapeHTML(msg.subject || '(no subject)')}</h3>
-        <p><em>From: ${escapeHTML(msg.sender)}</em></p>
-        <p>${escapeHTML(msg.body).replace(/\n/g, '<br>')}</p>
-        <div class="msg-actions">
-          <button class="btn-reply">Responder</button>
-          <button class="btn-forward">Encaminhar</button>
-          <button class="btn-delete">Excluir</button>
-        </div>
-      `;
-      detail.querySelector('.btn-reply').onclick = () => {
-        window.location.href = `mailto:${msg.sender}?subject=${encodeURIComponent(
-          'Re: ' + (msg.subject || '')
-        )}&body=${encodeURIComponent('\n\n---\n' + msg.body)}`;
-      };
-      detail.querySelector('.btn-forward').onclick = () => {
-        const to = prompt('Encaminhar para:');
-        if (!to) return;
-        window.location.href = `mailto:${to}?subject=${encodeURIComponent(
-          'Fwd: ' + (msg.subject || '')
-        )}&body=${encodeURIComponent('De: ' + msg.sender + '\n\n' + msg.body)}`;
-      };
-      detail.querySelector('.btn-delete').onclick = () => detail.remove();
-
-      summary.replaceWith(detail);
-      detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        <p><em>${escapeHTML(msg.sender)}</em></p>
+        <p>${escapeHTML(msg.body).replace(/\n/g,'<br>')}</p>`;
+      line.replaceWith(detail);
+      detail.scrollIntoView({ behavior:'smooth', block:'start' });
     };
-
-    container.appendChild(summary);
+    box.appendChild(line);
   });
 }
 
-let lastCount = 0;
+/* fetch messages for current inbox                              */
+async function fetchMessages() {
+  if (!currentId) return;
+  try {
+    const res  = await fetch(`${CONFIG.apiBase}/messages/${currentId}`);
+    if (!res.ok) throw new Error(res.status);
+    const msgs = await res.json();
 
+    if (msgs.length > lastCount) {
+      showToast();
+      lastCount = msgs.length;
+    }
+    renderMessages(msgs);
+  } catch (err) {
+    console.warn('Polling error (ignored):', err);
+  }
+}
+
+/* clear UI + timers + state                                     */
+function clearInbox() {
+  resetTimers();
+  inboxActive = false;
+  currentId   = null;
+
+  document.getElementById('inbox'      ).classList.add   ('hidden');
+  document.getElementById('btn-close'  ).classList.add   ('hidden');
+  document.getElementById('timer'      ).classList.add   ('hidden');
+  document.getElementById('messages'   ).innerHTML = '';
+  document.getElementById('closed-msg' ).classList.remove('hidden');
+}
+
+/* -------------------------------------------------------------- */
+/*  “Create Inbox” button                                         */
+/* -------------------------------------------------------------- */
 document.getElementById('btn-create').addEventListener('click', () => {
-  if (inboxActive) return;             // prevents multiple inboxes
+  if (inboxActive) return;      // ignore double‑click
   inboxActive = true;
+  resetTimers();
 
-  // reset UI
-  document.getElementById('closed-msg').classList.add('hidden');
-  document.getElementById('btn-close').classList.remove('hidden');
-  document.getElementById('messages').innerHTML = '';
+  /* UI initialisation */
+  document.getElementById('closed-msg').classList.add   ('hidden');
+  document.getElementById('btn-close' ).classList.remove('hidden');
+  document.getElementById('messages'  ).innerHTML = '';
 
-  // generate address
-  const inboxId = makeInboxId();
+  /* generate id, show address */
+  currentId = makeInboxId();
   document.getElementById('email-address').textContent =
-    `${inboxId}@${CONFIG.inboxDomain}`;
+        `${currentId}@${CONFIG.inboxDomain}`;
   document.getElementById('inbox').classList.remove('hidden');
 
-  // reset previous timers / pollers
-  clearInterval(window._poller);
-  clearTimeout(window._stopPoll);
-  clearInterval(timerInterval);
-
-  // start 20‑min timer
+  /* start countdown + first fetch + polling */
   startTimer();
-  lastCount = 0;
-
-  // start polling API
-  window._poller = setInterval(async () => {
-    try {
-      const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
-      if (!res.ok) throw new Error(res.status);
-      const msgs = await res.json();
-
-      if (msgs.length > lastCount) {
-        showToast();
-        lastCount = msgs.length;
-      }
-      renderMessages(msgs, inboxId);
-    } catch (err) {
-      console.warn('Polling error (ignored):', err);
-    }
-  }, CONFIG.pollInterval);
-
-  // auto‑close after 20 min
+  lastCount    = 0;
+  fetchMessages();                               // immediate
+  window._poller   = setInterval(fetchMessages, CONFIG.pollInterval);
   window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
 });
 
-/* ---------- manual close ---------- */
-
+/* -------------------------------------------------------------- */
+/*  “Close Inbox” button                                          */
+/* -------------------------------------------------------------- */
 document.getElementById('btn-close').addEventListener('click', () => {
-  const msg = t('confirm.close');
-  if (window.confirm(msg)) clearInbox();
+  if (confirm(t('confirm.close'))) clearInbox();
 });
-
-  window._poller = setInterval(async () => {
-    try {
-      const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
-      if (!res.ok) throw new Error(res.status);
-      const msgs = await res.json();
-
-      if (msgs.length > lastCount) {
-        showToast();
-        lastCount = msgs.length;
-      }
-      renderMessages(msgs, inboxId);
-    } catch (err) {
-      console.warn('Polling error (ignored):', err);
-    }
-  }, CONFIG.pollInterval);
-
-  window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
-});
-
-
-document.getElementById('btn-close').addEventListener('click', () => {
-  const msg = t('confirm.close');
-  if (window.confirm(msg)) {
-    clearInbox();
-  }
-});
-
