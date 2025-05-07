@@ -1,7 +1,7 @@
 // script.js
 const CONFIG = {
   idPrefix: 'flash',
-  idLength: 2,
+  idLength: 8,
   pollInterval: 5000,
   autoStopAfter: 20 * 60 * 1000,
   apiBase: 'https://api.flashmail.win',
