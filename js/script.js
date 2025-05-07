@@ -210,14 +210,24 @@ const sections = document.querySelectorAll('.content, .inbox');
 
 function showSection(id) {
   sections.forEach(s => s.classList.add('hidden'));
+
   if (id === 'mailbox-area') {
     document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
-  } else {
-    const sec = document.getElementById(id);
-    if (sec) sec.classList.remove('hidden');
   }
+
+  const targetSection = document.getElementById(id);
+  if (targetSection) {
+    targetSection.classList.remove('hidden');
+
+    
+    setTimeout(() => {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50); 
+  }
+
   tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
+
 
 tabs.forEach(tab => {
   tab.addEventListener('click', e => {
