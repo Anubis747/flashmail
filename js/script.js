@@ -1,39 +1,46 @@
-// Translations (fill in as needed)
-const i18n = {
-  en: { /* ... */ },
-  pt: { /* ... */ },
-  es: { /* ... */ },
-  fr: { /* ... */ },
-  de: { /* ... */ },
-  ru: { /* ... */ }
-};
+// Translations (…)
+const i18n = { /* … */ };
 
-// Detect language
-const lang = navigator.language.slice(0, 2);
+// language detection…
+const lang = navigator.language.slice(0,2);
 const locale = i18n[lang] ? lang : 'en';
-
-// Apply translations
 document.querySelectorAll('[data-i18n]').forEach(el => {
   const key = el.getAttribute('data-i18n');
   el.textContent = i18n[locale][key] || i18n.en[key] || el.textContent;
 });
 
-// Tab navigation
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.content, .inbox').forEach(sec => sec.classList.add('hidden'));
-    if (tab.dataset.target === 'mailbox-area') {
-      document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
-    } else {
-      document.getElementById(tab.dataset.target).classList.remove('hidden');
-    }
+// tab logic
+const tabs = document.querySelectorAll('.main-nav .tab');
+const sections = document.querySelectorAll('.content, .inbox');
+
+function showSection(id) {
+  sections.forEach(s => s.classList.add('hidden'));
+  if (id === 'mailbox-area') {
+    document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
+  } else {
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.remove('hidden');
+  }
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', e => {
+    e.preventDefault();
+    const target = tab.dataset.target;
+    history.replaceState(null, '', `#${target}`);
+    showSection(target);
   });
 });
 
-// Set current year
+// on load, respect hash or default to mailbox
+const initial = location.hash.slice(1) || 'mailbox-area';
+showSection(initial);
+
+// dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Placeholder for API integration
+// placeholder for API integration…
 document.getElementById('btn-create').addEventListener('click', async () => {
-  // TODO: implement call to /api/create and polling on /api/messages/:id
+  // TODO: implement /api/create & polling…
 });
