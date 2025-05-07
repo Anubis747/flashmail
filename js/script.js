@@ -35,7 +35,7 @@ const i18n = {
     'about.title': 'About Us',
     'about.text': 'FlashMail is a disposable email service. No login, no tracking. Just privacy.',
     'privacy.title': 'Privacy Policy',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': 'Close the inbox and delete all messages?'
   },
   pt: {
@@ -64,7 +64,7 @@ const i18n = {
     'about.title': 'Sobre Nós',
     'about.text': 'FlashMail é um serviço de e-mail descartável. Sem login, sem rastreio. Só privacidade.',
     'privacy.title': 'Política de Privacidade',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
   },
   es: {
@@ -93,7 +93,7 @@ const i18n = {
     'about.title': 'Acerca de Nosotros',
     'about.text': 'FlashMail es un servicio de correo descartable. Sin registro, sin rastreo. Solo privacidad.',
     'privacy.title': 'Política de Privacidad',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
   },
   fr: {
@@ -122,7 +122,7 @@ const i18n = {
     'about.title': 'À propos de nous',
     'about.text': 'FlashMail est un service d’e-mail jetable. Pas de login. Pas de suivi. Juste la vie privée.',
     'privacy.title': 'Politique de confidentialité',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
   },
   de: {
@@ -151,7 +151,7 @@ const i18n = {
     'about.title': 'Über uns',
     'about.text': 'FlashMail ist ein Einweg-E-Mail-Dienst. Kein Login. Kein Tracking. Nur Privatsphäre.',
     'privacy.title': 'Datenschutzerklärung',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': 'Postfach schließen und alle Nachrichten löschen?'
   },
   ru: {
@@ -180,7 +180,7 @@ const i18n = {
     'about.title': 'О нас',
     'about.text': 'FlashMail — одноразовый почтовый сервис. Без логина. Без отслеживания. Только приватность.',
     'privacy.title': 'Политика конфиденциальности',
-    'privacy.text': ''
+    'privacy.text': '',
     'confirm.close': 'Закрыть почтовый ящик и удалить все сообщения?'
   }
 };
