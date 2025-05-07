@@ -149,7 +149,8 @@
       <p>&copy; <span id="year"></span> FlashMail</p>
     </div>
   </footer>
-<div id="toast" class="hidden" data-i18n="toast.newMessage" style="
+  
+<div id="toast" data-i18n="toast.newMessage" style="
   position: fixed;
   bottom: 1rem;
   left: 50%;
@@ -161,8 +162,9 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   transition: opacity 0.3s;
   z-index: 1000;
-">
-</div>
+  opacity: 0;
+  pointer-events: none;
+"></div>
 
 <script src="js/script.js"></script>
 </body>
