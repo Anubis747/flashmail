@@ -294,3 +294,19 @@ body {
   opacity: 1 !important;
   pointer-events: auto;
 }
+#btn-close {
+  display: block;
+  margin: 0 auto 1rem auto;
+  background: #d32f2f;          /* vermelho */
+  color: #fff;
+  padding: 1rem 2.5rem;         /* maior */
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .2s;
+}
+#btn-close:hover {
+  background: #b71c1c;
+}
