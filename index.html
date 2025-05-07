@@ -36,42 +36,121 @@
         <ul id="messages" class="message-list"></ul>
       </div>
     </section>
+
     <section class="coffee-section">
-  <div class="coffee-card">
-    <h2 data-i18n="support.title">Gostou do serviço?</h2>
-    <p data-i18n="support.text">Apoie o projeto comprando um café!</p>
-    <a
-      href="https://www.buymeacoffee.com/liveordead"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="coffee-button"
-    >
-      <img
-        src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=liveordead&button_colour=7ad3ff&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=FFDD00"
-        alt="Buy me a coffee"
-      />
-    </a>
-  </div>
-</section>
+      <div class="coffee-card">
+        <h2 data-i18n="support.title">Did you enjoy our service?</h2>
+        <p data-i18n="support.text">Please consider supporting us via the button below.</p>
+        <a
+          href="https://www.buymeacoffee.com/liveordead"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="coffee-button"
+        >
+          <img
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=liveordead&button_colour=7ad3ff&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=FFDD00"
+            alt="Buy me a coffee"
+          />
+        </a>
+      </div>
+    </section>
 
     <section id="faq" class="content hidden">
       <h2 data-i18n="faq.title">FAQ</h2>
       <ul>
         <li>
-          <strong data-i18n="faq.q1">How long does the email last?</strong>
-          <p data-i18n="faq.a1">Email expires after 20 minutes by default.</p>
+          <strong data-i18n="faq.q1">How long does the email address live?</strong>
+          <p data-i18n="faq.a1">Each inbox is valid for 20 minutes by default and then all messages are purged.</p>
+        </li>
+        <li>
+          <strong data-i18n="faq.q2">Can I extend the expiration?</strong>
+          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer on your current ID.</p>
+        </li>
+        <li>
+          <strong data-i18n="faq.q3">Do you store any personal data?</strong>
+          <p data-i18n="faq.a3">No personal registration is required. We only store incoming messages and delete them after expiration.</p>
+        </li>
+        <li>
+          <strong data-i18n="faq.q4">Is this service free?</strong>
+          <p data-i18n="faq.a4">Absolutely. FlashMail is free to use, no ads and no signup required.</p>
+        </li>
+        <li>
+          <strong data-i18n="faq.q5">Are there any limits on usage?</strong>
+          <p data-i18n="faq.a5">You can create as many inboxes as you like. Each inbox can receive unlimited messages within its 20-minute lifetime.</p>
         </li>
       </ul>
     </section>
 
     <section id="about" class="content hidden">
-      <h2 data-i18n="about.title">About</h2>
-      <p data-i18n="about.text">This service provides temporary inboxes for disposable use, helping protect your privacy and avoid spam.</p>
+      <h2 data-i18n="about.title">About Us</h2>
+      <p data-i18n="about.text">
+        FlashMail is a simple, no-frills disposable email service designed to protect your privacy and keep your real inbox clean.  
+        No registration or personal data required—just click “Create Inbox” and start receiving mail instantly.  
+        Perfect for newsletter sign-ups, one-time verifications, or any situation where you need a temporary address.  
+        Built with modern serverless technology for instant global performance and automatic cleanup.
+      </p>
     </section>
 
     <section id="privacy" class="content hidden">
       <h2 data-i18n="privacy.title">Privacy Policy</h2>
-      <p data-i18n="privacy.text">We do not store any data beyond expiration. No personal info is collected or shared.</p>
+
+      <p><strong>Effective Date:</strong> May 7, 2025</p>
+
+      <h3>1. Introduction</h3>
+      <p>
+        FlashMail (“we”, “us”, “our”) provides a free disposable email service. Your privacy matters—this policy explains
+        what we collect, why, and how we use it.
+      </p>
+
+      <h3>2. Data We Collect</h3>
+      <ul>
+        <li>
+          <strong>Email Content:</strong> We parse and store incoming message headers and bodies in
+          Cloudflare Workers KV for up to 20 minutes, then they are deleted permanently.
+        </li>
+        <li>
+          <strong>Logs & Analytics:</strong> We keep minimal request logs (IP, timestamp, User-Agent) for abuse
+          prevention and debugging; logs are rotated and purged regularly.
+        </li>
+      </ul>
+
+      <h3>3. Use of Data</h3>
+      <p>
+        We only use your data to deliver messages to your temporary inbox and to maintain service security
+        and performance.
+      </p>
+
+      <h3>4. Third-Party Services</h3>
+      <ul>
+        <li><strong>Mailgun:</strong> handles SMTP-to-webhook ingestion of inbound email.</li>
+        <li><strong>Cloudflare Workers & KV:</strong> runs our API and stores messages with TTL.</li>
+        <li><strong>GitHub/Cloudflare Pages:</strong> serves static assets via CDN.</li>
+      </ul>
+
+      <h3>5. Data Retention</h3>
+      <p>
+        Messages expire 20 minutes after arrival; logs are kept for up to 30 days then deleted.
+      </p>
+
+      <h3>6. Security</h3>
+      <p>
+        HTTPS everywhere, strict Content-Security-Policy, and serverless isolation minimize risk.
+      </p>
+
+      <h3>7. Children’s Privacy</h3>
+      <p>
+        Not intended for children under 13; we do not knowingly collect data from minors.
+      </p>
+
+      <h3>8. Changes to Policy</h3>
+      <p>
+        We may update this policy—changes take effect when posted. Continued use implies acceptance.
+      </p>
+
+      <h3>9. Contact Us</h3>
+      <p>
+        For questions or data requests: <a href="mailto:privacy@flashmail.win">privacy@flashmail.win</a>
+      </p>
     </section>
   </main>
 
