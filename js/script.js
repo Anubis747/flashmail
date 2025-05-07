@@ -278,6 +278,7 @@ function escapeHTML(str) {
 // Toast notification
 function showToast() {
   const toast = document.getElementById('toast');
+  toast.textContent = t('toast.newMessage');
   toast.classList.add('show');
   toast.classList.remove('hidden');
   setTimeout(() => toast.classList.remove('show'), 3000);
