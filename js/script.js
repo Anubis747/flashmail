@@ -1,3 +1,20 @@
+const CONFIG = {
+  // 1) Prefixo para o ID da inbox
+  idPrefix: 'flash',
+
+  // 2) Quantidade de dígitos numéricos
+  idLength: 4,
+
+  // 3) Intervalo entre cada sondagem em milissegundos (5s)
+  pollInterval: 5000,
+
+  // 4) Máximo de tempo de vida da inbox antes de parar a sondagem (20 minutos)
+  autoStopAfter: 20 * 60 * 1000,  // 1.200.000 ms
+
+  // 5) Domínio da inbox configurado no Mailgun
+  inboxDomain: 'mg.flashmail.win'
+};
+
 // i18n translations
 const i18n = {
   en: {
@@ -25,7 +42,8 @@ const i18n = {
     'faq.a5': 'No. Create as many inboxes as you want.',
     'about.title': 'About Us',
     'about.text': 'FlashMail is a disposable email service. No login, no tracking. Just privacy.',
-    'privacy.title': 'Privacy Policy'
+    'privacy.title': 'Privacy Policy',
+    'privacy.text': ''
   },
   pt: {
     title: 'FlashMail',
@@ -52,7 +70,8 @@ const i18n = {
     'faq.a5': 'Não. Crie quantas caixas quiser.',
     'about.title': 'Sobre Nós',
     'about.text': 'FlashMail é um serviço de e-mail descartável. Sem login, sem rastreio. Só privacidade.',
-    'privacy.title': 'Política de Privacidade'
+    'privacy.title': 'Política de Privacidade',
+    'privacy.text': ''
   },
   es: {
     title: 'FlashMail',
@@ -79,7 +98,8 @@ const i18n = {
     'faq.a5': 'No. Puedes crear todas las bandejas que quieras.',
     'about.title': 'Acerca de Nosotros',
     'about.text': 'FlashMail es un servicio de correo descartable. Sin registro, sin rastreo. Solo privacidad.',
-    'privacy.title': 'Política de Privacidad'
+    'privacy.title': 'Política de Privacidad',
+    'privacy.text': ''
   },
   fr: {
     title: 'FlashMail',
@@ -106,7 +126,8 @@ const i18n = {
     'faq.a5': 'Non. Créez autant de boîtes que vous voulez.',
     'about.title': 'À propos de nous',
     'about.text': 'FlashMail est un service d’e-mail jetable. Pas de login. Pas de suivi. Juste la vie privée.',
-    'privacy.title': 'Politique de confidentialité'
+    'privacy.title': 'Politique de confidentialité',
+    'privacy.text': ''
   },
   de: {
     title: 'FlashMail',
@@ -133,7 +154,8 @@ const i18n = {
     'faq.a5': 'Nein. Sie können unbegrenzt Postfächer erstellen.',
     'about.title': 'Über uns',
     'about.text': 'FlashMail ist ein Einweg-E-Mail-Dienst. Kein Login. Kein Tracking. Nur Privatsphäre.',
-    'privacy.title': 'Datenschutzerklärung'
+    'privacy.title': 'Datenschutzerklärung',
+    'privacy.text': ''
   },
   ru: {
     title: 'FlashMail',
@@ -143,24 +165,25 @@ const i18n = {
     'nav.about': 'О нас',
     'nav.privacy': 'Конфиденциальность',
     'btn.create': 'Создать ящик',
-    'inbox.label': 'Ваш email:',
+    'inbox.label': 'Ваш e-mail:',
     'inbox.expires': 'Истекает через 20 минут.',
     'support.title': 'Вам понравился наш сервис?',
     'support.text': 'Поддержите нас, нажав на кнопку ниже.',
     'faq.title': 'FAQ',
     'faq.q1': 'Как долго живет адрес электронной почты?',
-    'faq.a1': 'Каждый ящик живет 20 минут, после чего удаляется.',
+    'faq.a1': 'Каждый ящик живет 20 минут, затем удаляется.',
     'faq.q2': 'Можно продлить срок?',
     'faq.a2': 'Да — нажмите «Создать ящик» снова до истечения времени.',
     'faq.q3': 'Вы храните личные данные?',
     'faq.a3': 'Нет. Регистрация не требуется, данные не сохраняются.',
     'faq.q4': 'Сервис бесплатный?',
-    'faq.a4': 'Да, полностью бесплатный и поддерживается за счет рекламы.',
+    'faq.a4': 'Да, полностью бесплатный и поддерживается рекламой.',
     'faq.q5': 'Есть ограничения?',
     'faq.a5': 'Нет. Вы можете создать сколько угодно ящиков.',
     'about.title': 'О нас',
     'about.text': 'FlashMail — одноразовый почтовый сервис. Без логина. Без отслеживания. Только приватность.',
-    'privacy.title': 'Политика конфиденциальности'
+    'privacy.title': 'Политика конфиденциальности',
+    'privacy.text': ''
   }
 };
 
@@ -218,16 +241,13 @@ function showSection(id) {
   const targetSection = document.getElementById(id);
   if (targetSection) {
     targetSection.classList.remove('hidden');
-
-    
     setTimeout(() => {
       targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50); 
+    }, 50);
   }
 
   tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
-
 
 tabs.forEach(tab => {
   tab.addEventListener('click', e => {
@@ -244,18 +264,54 @@ showSection(initial);
 // Dynamic year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Simulated inbox (placeholder)
-document.getElementById('btn-create').addEventListener('click', async () => {
-  const email = `user${Math.floor(Math.random() * 10000)}@flashmail.win`;
-  const emailEl = document.getElementById('email-address');
-  const inboxEl = document.getElementById('inbox');
-  const msgList = document.getElementById('messages');
+// Generate inbox IDs
+function makeInboxId() {
+  const num = Math.floor(Math.random() * Math.pow(10, CONFIG.idLength));
+  return CONFIG.idPrefix + String(num).padStart(CONFIG.idLength, '0');
+}
 
-  emailEl.textContent = email;
-  inboxEl.classList.remove('hidden');
+// Create Inbox + Polling
+document.getElementById('btn-create').addEventListener('click', () => {
+  const inboxId = makeInboxId();
+  const emailAddr = `${inboxId}@${CONFIG.inboxDomain}`;
 
-  msgList.innerHTML = `
-    <li><strong>Welcome!</strong><br>This is a sample message in your temporary inbox.</li>
-    <li><strong>Promo:</strong><br>50% off on nothing. This email will self-destruct in 20 minutes.</li>
-  `;
+  // Display
+  document.getElementById('email-address').textContent = emailAddr;
+  document.getElementById('inbox').classList.remove('hidden');
+
+  // Clear old pollers
+  if (window._poller)  clearInterval(window._poller);
+  if (window._stopPoll) clearTimeout(window._stopPoll);
+
+  // Poll every CONFIG.pollInterval
+  window._poller = setInterval(async () => {
+    try {
+      const res = await fetch(`/api/messages/${inboxId}`);
+      if (!res.ok) throw new Error(res.status);
+      const messages = await res.json();
+      const listEl = document.getElementById('messages');
+      listEl.innerHTML = '';
+
+      if (messages.length === 0) {
+        listEl.innerHTML = '<li>No messages yet.</li>';
+      } else {
+        messages.forEach(msg => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <strong>${msg.subject || '(no subject)'}</strong><br>
+            <em>From: ${msg.sender}</em><br>
+            <div>${(msg.body || '').replace(/\n/g,'<br>')}</div>
+          `;
+          listEl.appendChild(li);
+        });
+      }
+    } catch (e) {
+      console.error('Polling error', e);
+    }
+  }, CONFIG.pollInterval);
+
+  // Stop polling after autoStopAfter
+  window._stopPoll = setTimeout(() => {
+    clearInterval(window._poller);
+  }, CONFIG.autoStopAfter);
 });
