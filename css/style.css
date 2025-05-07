@@ -310,3 +310,22 @@ body {
 #btn-close:hover {
   background: #b71c1c;
 }
+.email-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0.5rem;
+}
+
+.copy-btn{
+  background:var(--color-primary);
+  color:var(--text-light);
+  border:none;
+  padding:0.4rem 0.6rem;
+  font-size:1rem;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:opacity .2s;
+}
+.copy-btn:hover{opacity:.85;}
+.copy-btn:active{opacity:.7;}
