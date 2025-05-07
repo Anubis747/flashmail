@@ -96,14 +96,14 @@ body {
   color: var(--text-dark);
 }
 
-/* Language dropdown (inline centralizado) */
+/* Dropdown de idioma centralizado entre cards */
 .lang-inline {
   display: flex;
   justify-content: center;
-  margin: -1rem 0 2rem 0;
+  margin: 2rem 0;       /* espaçamento equivalente aos cards */
 }
-.lang-inline select,
-#lang-select {
+
+.lang-inline select {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 600;
