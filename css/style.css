@@ -273,6 +273,7 @@ body {
 .message-detail .btn-reply { background: var(--color-primary); color: var(--text-light); }
 .message-detail .btn-forward { background: var(--color-accent); color: var(--text-light); }
 .message-detail .btn-delete  { background: #e0e0e0; color: var(--text-dark); }
+
 #toast {
   position: fixed;
   bottom: 1rem;
@@ -293,5 +294,3 @@ body {
   opacity: 1 !important;
   pointer-events: auto;
 }
-
-
