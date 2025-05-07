@@ -452,7 +452,7 @@ function renderMessages(msgs, inboxId) {
 // Create inbox & start polling
 let lastCount = 0;
 document.getElementById('btn-create').addEventListener('click', () => {
-  if (inboxActive) return; // Evita múltiplas caixas
+  if (inboxActive) return;   
   inboxActive = true;
 
   document.getElementById('closed-msg').classList.add('hidden');
@@ -463,9 +463,28 @@ document.getElementById('btn-create').addEventListener('click', () => {
   document.getElementById('email-address').textContent = `${inboxId}@${CONFIG.inboxDomain}`;
   document.getElementById('inbox').classList.remove('hidden');
 
-  clearInbox();
+  clearInterval(window._poller);
+  clearTimeout(window._stopPoll);
+  clearInterval(timerInterval);
+
   startTimer();
   lastCount = 0;
+  window._poller = setInterval(async () => {
+    try {
+      const res = await fetch(`${CONFIG.apiBase}/messages/${inboxId}`);
+      if (!res.ok) throw new Error(res.status);
+      const msgs = await res.json();
+      if (msgs.length > lastCount) {
+        showToast();
+        lastCount = msgs.length;
+      }
+      renderMessages(msgs, inboxId);
+    } catch (err) {
+      console.warn('Polling error (ignored):', err);
+    }
+  }, CONFIG.pollInterval);
+  window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
+});
 
   window._poller = setInterval(async () => {
     try {
