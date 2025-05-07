@@ -284,9 +284,12 @@ function showToast() {
   const toast = document.getElementById('toast');
   if (!toast) return;
   toast.textContent = t('toast.newMessage');
-  toast.classList.add('show');
   toast.classList.remove('hidden');
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+    toast.classList.add('hidden');
+  }, 3000);
 }
 
 // Timer
