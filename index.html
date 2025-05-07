@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="title">FlashMail</title>
 
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  base-uri 'self';
-  form-action 'self';
-  connect-src 'self' https://api.flashmail.win https://fundingchoicesmessages.google.com;
-  script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagservices.com https://fundingchoicesmessages.google.com;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
-  img-src 'self' data: https://img.buymeacoffee.com;
-">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    form-action 'self';
+    connect-src 'self' https://api.flashmail.win https://fundingchoicesmessages.google.com;
+    script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagservices.com https://fundingchoicesmessages.google.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https://img.buymeacoffee.com;
+  ">
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9273959048665563"
      crossorigin="anonymous"></script>
@@ -46,20 +47,20 @@
   </div>
 </header>
 
-  <main class="container">
-<section id="mailbox-area" class="card">
-  <button id="btn-create" class="btn-primary">Create Inbox</button>
-  <button id="btn-close" class="btn-secondary hidden" data-i18n="btn.close">Close Inbox</button>
-  <p id="timer" class="timer hidden">20:00</p>
-  <div id="inbox" class="inbox hidden">
-    <p class="inbox-label">Your email:</p>
-    <code id="email-address" class="email-code"></code>
-    <div id="messages" class="message-list"></div>
-  </div>
-<p id="closed-msg" class="closed-msg hidden" data-i18n="inbox.closed">
-  Inbox closed. All messages deleted.
-</p>
-</section>
+<main class="container">
+  <section id="mailbox-area" class="card">
+    <button id="btn-create" class="btn-primary" data-i18n="btn.create">Create Inbox</button>
+    <button id="btn-close" class="btn-secondary hidden" data-i18n="btn.close">Close Inbox</button>
+    <p id="timer" class="timer hidden">20:00</p>
+    <div id="inbox" class="inbox hidden">
+      <p class="inbox-label" data-i18n="inbox.label">Your email:</p>
+      <code id="email-address" class="email-code"></code>
+      <div id="messages" class="message-list"></div>
+    </div>
+    <p id="closed-msg" class="closed-msg hidden" data-i18n="inbox.closed">
+      Inbox closed. All messages deleted.
+    </p>
+  </section>
 
   <div class="lang-inline">
     <label for="lang-select" class="sr-only">Language</label>
@@ -73,98 +74,64 @@
     </select>
   </div>
 
-    <!-- Support -->
-    <section class="card coffee-section">
-      <div class="coffee-card">
-        <h2 data-i18n="support.title">Did you enjoy our service?</h2>
-        <p data-i18n="support.text">Please consider supporting us via the button below.</p>
-        <a
-          href="https://www.buymeacoffee.com/liveordead"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="coffee-button"
-        >
-          <img
-            src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=liveordead&button_colour=7ad3ff&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=FFDD00"
-            alt="Buy me a coffee"
-          />
-        </a>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="card content hidden">
-      <h2 data-i18n="faq.title">FAQ</h2>
-      <ul>
-        <li>
-          <strong data-i18n="faq.q1">How long does the email address live?</strong>
-          <p data-i18n="faq.a1">Each inbox is valid for 20 minutes by default and then all messages are purged.</p>
-        </li>
-        <li>
-          <strong data-i18n="faq.q2">Can I extend the expiration?</strong>
-          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer.</p>
-        </li>
-        <li>
-          <strong data-i18n="faq.q3">Do you store any personal data?</strong>
-          <p data-i18n="faq.a3">No—no registration or personal data is ever collected or stored.</p>
-        </li>
-        <li>
-          <strong data-i18n="faq.q4">Is this service free?</strong>
-          <p data-i18n="faq.a4">Yes—fully free, ad-supported, no signup required.</p>
-        </li>
-        <li>
-          <strong data-i18n="faq.q5">Are there any usage limits?</strong>
-          <p data-i18n="faq.a5">Unlimited inboxes; each accepts unlimited messages for its 20-minute life.</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="card content hidden">
-      <h2 data-i18n="about.title">About Us</h2>
-      <p data-i18n="about.text">
-        FlashMail is a no-frills disposable email service that keeps your real inbox clean.
-        No cookies, no personal data—just click “Create Inbox” and receive mail instantly.
-        Built serverlessly for speed and automatic cleanup.
-      </p>
-    </section>
-
-    <!-- Privacy -->
-    <section id="privacy" class="card content hidden">
-      <h2 data-i18n="privacy.title">Privacy Policy</h2>
-      <p><strong>Effective Date:</strong> May 7, 2025</p>
-      <ul>
-        <li><strong>No cookies.</strong> We do not use cookies or any browser storage.</li>
-        <li><strong>No personal data.</strong> We don’t collect or store any personal information.</li>
-        <li><strong>Temporary messages.</strong> Emails live 20 minutes then self-destruct.</li>
-        <li><strong>Ads only.</strong> We show third-party ads to keep FlashMail free—no trackers, no profiling.</li>
-        <li><strong>No tracking.</strong> We do not log your activity beyond basic error/abuse logs.</li>
-      </ul>
-      <p>That’s it. Enjoy your privacy. 🚀</p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> FlashMail</p>
+  <!-- Support -->
+  <section class="card coffee-section">
+    <div class="coffee-card">
+      <h2 data-i18n="support.title">Did you enjoy our service?</h2>
+      <p data-i18n="support.text">Please consider supporting us via the button below.</p>
+      <a href="https://www.buymeacoffee.com/liveordead" target="_blank" rel="noopener noreferrer" class="coffee-button">
+        <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=liveordead&button_colour=7ad3ff&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=FFDD00" alt="Buy me a coffee"/>
+      </a>
     </div>
-  </footer>
-  
-<div id="toast" class="hidden" data-i18n="toast.newMessage" style="
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-primary);
-  color: white;
-  padding: 0.75rem 1.25rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: opacity 0.3s;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-"></div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="card content hidden">
+    <h2 data-i18n="faq.title">FAQ</h2>
+    <ul>
+      <li><strong data-i18n="faq.q1">How long does the email address live?</strong>
+          <p data-i18n="faq.a1">Each inbox is valid for 20 minutes by default and then all messages are purged.</p>
+      </li>
+      <li><strong data-i18n="faq.q2">Can I extend the expiration?</strong>
+          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer.</p>
+      </li>
+      <li><strong data-i18n="faq.q3">Do you store any personal data?</strong>
+          <p data-i18n="faq.a3">No—no registration or personal data is ever collected or stored.</p>
+      </li>
+      <li><strong data-i18n="faq.q4">Is this service free?</strong>
+          <p data-i18n="faq.a4">Yes—fully free, ad-supported, no signup required.</p>
+      </li>
+      <li><strong data-i18n="faq.q5">Are there any usage limits?</strong>
+          <p data-i18n="faq.a5">Unlimited inboxes; each accepts unlimited messages for its 20-minute life.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="card content hidden">
+    <h2 data-i18n="about.title">About Us</h2>
+    <p data-i18n="about.text">
+      FlashMail is a no-frills disposable email service that keeps your real inbox clean.
+      No cookies, no personal data—just click “Create Inbox” and receive mail instantly.
+      Built serverlessly for speed and automatic cleanup.
+    </p>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy" class="card content hidden">
+    <h2 data-i18n="privacy.title">Privacy Policy</h2>
+    <!-- todo o conteúdo traduzido via JS -->
+    <div data-i18n="privacy.text"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="year"></span> FlashMail</p>
+  </div>
+</footer>
+
+<div id="toast" class="hidden" data-i18n="toast.newMessage"></div>
 
 <script src="js/script.js"></script>
 </body>
