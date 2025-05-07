@@ -232,3 +232,45 @@ body {
   white-space: nowrap;
   border: 0;
 }
+/* mensagem em modo sumário */
+.message-summary {
+  background: var(--bg-light);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.message-summary:hover {
+  background: #e8ebf7;
+}
+
+/* container da mensagem expandida */
+.message-detail {
+  background: var(--color-secondary);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* botões de ação dentro do detail */
+.message-detail .msg-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.message-detail .msg-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.message-detail .btn-reply { background: var(--color-primary); color: var(--text-light); }
+.message-detail .btn-forward { background: var(--color-accent); color: var(--text-light); }
+.message-detail .btn-delete  { background: #e0e0e0; color: var(--text-dark); }
+
