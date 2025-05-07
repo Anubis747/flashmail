@@ -15,10 +15,11 @@
           frame-ancestors 'none';
           block-all-mixed-content;
           connect-src 'self';
-          script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com;
-          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-          img-src 'self' data: https://img.buymeacoffee.com;
+          script-src 'self' https://pagead2.googlesyndication.com 'unsafe-inline';
+          style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+          img-src 'self' data: https://img.buymeacoffee.com https://pagead2.googlesyndication.com;
           font-src https://fonts.gstatic.com;
+          frame-src https://pagead2.googlesyndication.com https://tpc.googlesyndication.com;
         ">
 
   <!-- Fonts & Styles -->
@@ -38,9 +39,10 @@
     <div class="container">
       <h1 class="logo" data-i18n="header.title">Your easiest temporary email service.</h1>
       <nav class="main-nav">
-        <a href="#faq" class="tab" data-i18n="nav.faq">FAQ</a>
-        <a href="#about" class="tab" data-i18n="nav.about">About</a>
-        <a href="#privacy" class="tab" data-i18n="nav.privacy">Privacy</a>
+        <a href="#mailbox-area" class="tab" data-target="mailbox-area" data-i18n="nav.mailbox">Inbox</a>
+        <a href="#faq" class="tab" data-target="faq" data-i18n="nav.faq">FAQ</a>
+        <a href="#about" class="tab" data-target="about" data-i18n="nav.about">About</a>
+        <a href="#privacy" class="tab" data-target="privacy" data-i18n="nav.privacy">Privacy</a>
       </nav>
     </div>
   </header>
@@ -83,19 +85,19 @@
         </li>
         <li>
           <strong data-i18n="faq.q2">Can I extend the expiration?</strong>
-          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer on your current ID.</p>
+          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer.</p>
         </li>
         <li>
           <strong data-i18n="faq.q3">Do you store any personal data?</strong>
-          <p data-i18n="faq.a3">No personal registration is required. We only store incoming messages and delete them after expiration.</p>
+          <p data-i18n="faq.a3">No—no registration or personal data is ever collected or stored.</p>
         </li>
         <li>
           <strong data-i18n="faq.q4">Is this service free?</strong>
-          <p data-i18n="faq.a4">Absolutely. FlashMail is free to use, ads supported, no signup required.</p>
+          <p data-i18n="faq.a4">Yes—fully free, ad-supported, no signup required.</p>
         </li>
         <li>
-          <strong data-i18n="faq.q5">Are there any limits on usage?</strong>
-          <p data-i18n="faq.a5">You can create as many inboxes as you like. Each inbox can receive unlimited messages within its 20-minute lifetime.</p>
+          <strong data-i18n="faq.q5">Are there any usage limits?</strong>
+          <p data-i18n="faq.a5">Unlimited inboxes; each one accepts unlimited messages for its 20-minute life.</p>
         </li>
       </ul>
     </section>
@@ -103,10 +105,9 @@
     <section id="about" class="content hidden">
       <h2 data-i18n="about.title">About Us</h2>
       <p data-i18n="about.text">
-        FlashMail is a simple, no-frills disposable email service designed to protect your privacy and keep your real inbox clean.
-        No registration or personal data required—just click “Create Inbox” and start receiving mail instantly.
-        Perfect for newsletter sign-ups, one-time verifications, or any situation where you need a temporary address.
-        Built with modern serverless technology for instant global performance and automatic cleanup.
+        FlashMail is a no-frills disposable email service that keeps your real inbox clean.  
+        No cookies, no personal data, just click “Create Inbox” and receive mail instantly.  
+        Built serverlessly for speed and automatic cleanup.
       </p>
     </section>
 
@@ -116,10 +117,10 @@
       <p>FlashMail (“we”, “us”, “our”) is a free, disposable email service. Your privacy matters.</p>
       <ul>
         <li><strong>No cookies.</strong> We do not use cookies or any browser storage.</li>
-        <li><strong>No personal data.</strong> We don’t collect or store names, addresses, or any personal information.</li>
-        <li><strong>Temporary messages.</strong> Incoming emails are kept in memory for <strong>20 minutes</strong> and then deleted permanently.</li>
-        <li><strong>Ads only.</strong> We show third-party ads to keep FlashMail free—no trackers, no profiling.</li>
-        <li><strong>No tracking.</strong> We do not track your activity or share data with anyone.</li>
+        <li><strong>No personal data.</strong> We don’t collect or store any personal information.</li>
+        <li><strong>Temporary messages.</strong> Emails live 20 minutes then self-destruct.</li>
+        <li><strong>Ads only.</strong> AdSense ads to keep FlashMail free—no trackers, no profiling.</li>
+        <li><strong>No tracking.</strong> We do not log your activity beyond basic error/abuse logs.</li>
       </ul>
       <p>That’s it. Enjoy your privacy. 🚀</p>
     </section>
@@ -132,7 +133,7 @@
   </footer>
 
   <script src="js/script.js"></script>
-  <!-- Example Google AdSense snippet -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <ins class="adsbygoogle"
        style="display:block"
