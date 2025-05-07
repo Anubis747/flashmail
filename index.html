@@ -6,20 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="title">FlashMail</title>
 
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
-      content="
-        default-src 'self';
-        base-uri 'self';
-        form-action 'self';
-        block-all-mixed-content;
-        connect-src 'self' https://ep1.adtrafficquality.google.com https://pagead2.googlesyndication.com;
-        script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        img-src 'self' data: https://img.buymeacoffee.com https://pagead2.googlesyndication.com;
-        font-src https://fonts.gstatic.com;
-        frame-src https://pagead2.googlesyndication.com;
-      ">
-
+        content="
+          default-src 'self';
+          base-uri 'self';
+          form-action 'self';
+          block-all-mixed-content;
+          connect-src 'self';
+          script-src 'self' 'unsafe-inline';
+          style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+          img-src 'self' data: https://img.buymeacoffee.com;
+          font-src https://fonts.gstatic.com;
+          frame-src 'self';
+        ">
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,7 @@
   </header>
 
   <main class="container">
+    <!-- Inbox -->
     <section id="mailbox-area" class="card">
       <button id="btn-create" class="btn-primary" data-i18n="btn.create">Create Inbox</button>
       <div id="inbox" class="inbox hidden">
@@ -57,7 +58,8 @@
       </div>
     </section>
 
-    <section class="coffee-section">
+    <!-- Support (Buy Me a Coffee) -->
+    <section class="card coffee-section">
       <div class="coffee-card">
         <h2 data-i18n="support.title">Did you enjoy our service?</h2>
         <p data-i18n="support.text">Please consider supporting us via the button below.</p>
@@ -75,7 +77,8 @@
       </div>
     </section>
 
-    <section id="faq" class="content hidden">
+    <!-- FAQ -->
+    <section id="faq" class="card content hidden">
       <h2 data-i18n="faq.title">FAQ</h2>
       <ul>
         <li>
@@ -96,29 +99,30 @@
         </li>
         <li>
           <strong data-i18n="faq.q5">Are there any usage limits?</strong>
-          <p data-i18n="faq.a5">Unlimited inboxes; each one accepts unlimited messages for its 20-minute life.</p>
+          <p data-i18n="faq.a5">Unlimited inboxes; each accepts unlimited messages for its 20-minute life.</p>
         </li>
       </ul>
     </section>
 
-    <section id="about" class="content hidden">
+    <!-- About -->
+    <section id="about" class="card content hidden">
       <h2 data-i18n="about.title">About Us</h2>
       <p data-i18n="about.text">
-        FlashMail is a no-frills disposable email service that keeps your real inbox clean.  
-        No cookies, no personal data, just click “Create Inbox” and receive mail instantly.  
+        FlashMail is a no-frills disposable email service that keeps your real inbox clean.
+        No cookies, no personal data—just click “Create Inbox” and receive mail instantly.
         Built serverlessly for speed and automatic cleanup.
       </p>
     </section>
 
-    <section id="privacy" class="content hidden">
+    <!-- Privacy -->
+    <section id="privacy" class="card content hidden">
       <h2 data-i18n="privacy.title">Privacy Policy</h2>
       <p><strong>Effective Date:</strong> May 7, 2025</p>
-      <p>FlashMail (“we”, “us”, “our”) is a free, disposable email service. Your privacy matters.</p>
       <ul>
         <li><strong>No cookies.</strong> We do not use cookies or any browser storage.</li>
         <li><strong>No personal data.</strong> We don’t collect or store any personal information.</li>
         <li><strong>Temporary messages.</strong> Emails live 20 minutes then self-destruct.</li>
-        <li><strong>Ads only.</strong> AdSense ads to keep FlashMail free—no trackers, no profiling.</li>
+        <li><strong>Ads only.</strong> We show third-party ads to keep FlashMail free—no trackers, no profiling.</li>
         <li><strong>No tracking.</strong> We do not log your activity beyond basic error/abuse logs.</li>
       </ul>
       <p>That’s it. Enjoy your privacy. 🚀</p>
@@ -132,13 +136,5 @@
   </footer>
 
   <script src="js/script.js"></script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-       data-ad-slot="YYYYYYYYYY"
-       data-ad-format="auto"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </body>
 </html>
