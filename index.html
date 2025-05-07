@@ -6,21 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="title">FlashMail</title>
 
-  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
-        content="
-          default-src 'none';
-          base-uri 'self';
-          form-action 'self';
-          frame-ancestors 'none';
-          block-all-mixed-content;
-          connect-src 'self';
-          script-src 'self' https://pagead2.googlesyndication.com 'unsafe-inline';
-          style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
-          img-src 'self' data: https://img.buymeacoffee.com https://pagead2.googlesyndication.com;
-          font-src https://fonts.gstatic.com;
-          frame-src https://pagead2.googlesyndication.com https://tpc.googlesyndication.com;
-        ">
+      content="
+        default-src 'self';
+        base-uri 'self';
+        form-action 'self';
+        block-all-mixed-content;
+        connect-src 'self' https://ep1.adtrafficquality.google.com https://pagead2.googlesyndication.com;
+        script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        img-src 'self' data: https://img.buymeacoffee.com https://pagead2.googlesyndication.com;
+        font-src https://fonts.gstatic.com;
+        frame-src https://pagead2.googlesyndication.com;
+      ">
+
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
