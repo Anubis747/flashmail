@@ -1,14 +1,24 @@
-// script.js
+/* ==========================================================
+   FlashMail – client script                                  
+   (full file – nothing omitted)                              
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   0.  Global configuration                                  
+   ---------------------------------------------------------- */
 const CONFIG = {
-  idPrefix: 'flash',
-  idLength: 5,
-  pollInterval: 5000,
-  autoStopAfter: 20 * 60 * 1000,
-  apiBase: 'https://api.flashmail.win',
-  inboxDomain: 'mg.flashmail.win'
+  idPrefix      : 'flash',             // random inbox id prefix
+  idLength      : 5,                   // # of random digits
+  pollInterval  : 5_000,               // ms between API polls
+  autoStopAfter : 20 * 60 * 1_000,     // inbox lifetime (20 min)
+  apiBase       : 'https://api.flashmail.win',
+  inboxDomain   : 'mg.flashmail.win'
 };
 
-// i18n translations
+/* ----------------------------------------------------------
+   1.  Translations                                          
+   (full object – ALL languages)                            
+   ---------------------------------------------------------- */
 const i18n = {
   en: {
     title: 'FlashMail',
@@ -48,24 +58,27 @@ const i18n = {
       <p>That’s it. Enjoy your privacy. 🚀</p>
     `,
     'toast.newMessage': 'New message received',
+    'toast.copied': 'Copied!',
     'btn.close': 'Close Inbox',
     'inbox.closed': 'Inbox closed. All messages deleted.',
     'confirm.close': 'Close the inbox and delete all messages?'
   },
+
+  /* ---------- Portuguese --------------------------------- */
   pt: {
     title: 'FlashMail',
-    'header.title': 'Seu serviço de e-mail temporário mais fácil.',
+    'header.title': 'Seu serviço de e‑mail temporário mais fácil.',
     'nav.mailbox': 'Principal',
     'nav.faq': 'FAQ',
     'nav.about': 'Sobre',
     'nav.privacy': 'Privacidade',
     'btn.create': 'Criar Email',
-    'inbox.label': 'Seu e-mail:',
+    'inbox.label': 'Seu e‑mail:',
     'inbox.expires': 'Expira em 20 minutos.',
     'support.title': 'Gostou do nosso serviço?',
     'support.text': 'Considere nos apoiar pelo botão abaixo.',
     'faq.title': 'FAQ',
-    'faq.q1': 'Quanto tempo o e-mail dura?',
+    'faq.q1': 'Quanto tempo o e‑mail dura?',
     'faq.a1': 'Cada caixa de email é válida por 20 minutos e depois é apagada.',
     'faq.q2': 'Posso estender o tempo?',
     'faq.a2': 'Sim—clique em “Criar Email” antes de expirar.',
@@ -76,7 +89,7 @@ const i18n = {
     'faq.q5': 'Há limite de uso?',
     'faq.a5': 'Não. Crie quantas caixas quiser.',
     'about.title': 'Sobre Nós',
-    'about.text': 'FlashMail é um serviço de e-mail descartável. Sem login, sem rastreio. Só privacidade.',
+    'about.text': 'FlashMail é um serviço de e‑mail descartável. Sem login, sem rastreio. Só privacidade.',
     'privacy.title': 'Política de Privacidade',
     'privacy.text': `
       <p><strong>Vigente a partir de:</strong> 7 de maio de 2025</p>
@@ -90,10 +103,13 @@ const i18n = {
       <p>É isso. Aproveite sua privacidade. 🚀</p>
     `,
     'toast.newMessage': 'Nova mensagem recebida',
+    'toast.copied': 'Copiado!',
     'btn.close': 'Encerrar Caixa',
     'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
   },
+
+  /* ---------- Spanish ------------------------------------ */
   es: {
     title: 'FlashMail',
     'header.title': 'Tu servicio de correo temporal más sencillo.',
@@ -132,26 +148,30 @@ const i18n = {
       <p>Eso es todo. Disfruta tu privacidad. 🚀</p>
     `,
     'toast.newMessage': 'Nuevo mensaje recibido',
+    'toast.copied': '¡Copiado!',
     'btn.close': 'Cerrar bandeja',
     'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
     'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
   },
+
+  /* ---------- French ------------------------------------- */
   fr: {
     title: 'FlashMail',
-    'header.title': 'Votre service d’e-mail temporaire le plus simple.',
+    'header.title': 'Votre service d’e‑mail temporaire le plus simple.',
     'nav.mailbox': 'Boîte de réception',
     'nav.faq': 'FAQ',
     'nav.about': 'À propos',
-    'nav.privacy': 'Confidentialité',    'btn.create': 'Créer une boîte',
-    'inbox.label': 'Votre e-mail :',
+    'nav.privacy': 'Confidentialité',
+    'btn.create': 'Créer une boîte',
+    'inbox.label': 'Votre e‑mail :',
     'inbox.expires': 'Expire dans 20 minutes.',
     'support.title': 'Vous aimez notre service ?',
-    'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci-dessous.',
+    'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci‑dessous.',
     'faq.title': 'Foire aux questions',
     'faq.q1': 'Combien de temps la boîte de réception reste‑t‑elle active ?',
     'faq.a1': 'Chaque boîte est active pendant 20 minutes, puis les messages sont supprimés.',
     'faq.q2': 'Puis‑je prolonger la durée ?',
-    'faq.a2': 'Oui — cliquez sur “Créer une boîte” avant l’expiration.',
+    'faq.a2': 'Oui — cliquez sur « Créer une boîte » avant l’expiration.',
     'faq.q3': 'Enregistrez‑vous des données personnelles ?',
     'faq.a3': 'Non. Aucune inscription ni collecte de données personnelles.',
     'faq.q4': 'Le service est‑il gratuit ?',
@@ -162,7 +182,7 @@ const i18n = {
     'about.text': 'FlashMail est un service de messagerie jetable. Pas d’inscription, pas de suivi. Juste de la confidentialité.',
     'privacy.title': 'Politique de confidentialité',
     'privacy.text': `
-      <p><strong>Date d’effet :</strong> 7 mai 2025</p>
+      <p><strong>Date d’effet :</strong> 7 mai 2025</p>
       <ul>
         <li><strong>Aucun cookie.</strong> Nous n’utilisons pas de cookies ni de stockage local.</li>
         <li><strong>Aucune donnée personnelle.</strong> Nous ne collectons ni ne stockons d’informations personnelles.</li>
@@ -173,10 +193,13 @@ const i18n = {
       <p>C’est tout. Profitez de votre confidentialité. 🚀</p>
     `,
     'toast.newMessage': 'Nouveau message reçu',
+    'toast.copied': 'Copié !',
     'btn.close': 'Fermer la boîte',
     'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
     'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
   },
+
+  /* ---------- German ------------------------------------- */
   de: {
     title: 'FlashMail',
     'header.title': 'Ihr einfachster temporärer E‑Mail‑Dienst.',
@@ -193,7 +216,7 @@ const i18n = {
     'faq.q1': 'Wie lange ist das Postfach aktiv?',
     'faq.a1': 'Jedes Postfach ist 20 Minuten aktiv, dann werden alle Nachrichten gelöscht.',
     'faq.q2': 'Kann ich die Zeit verlängern?',
-    'faq.a2': 'Ja – klicken Sie vor Ablauf erneut auf „Postfach erstellen“.',
+    'faq.a2': 'Ja – klicken Sie vor Ablauf erneut auf „Postfach erstellen“. ',
     'faq.q3': 'Speichern Sie persönliche Daten?',
     'faq.a3': 'Nein. Keine Registrierung, keine Datenspeicherung.',
     'faq.q4': 'Ist der Service kostenlos?',
@@ -204,7 +227,7 @@ const i18n = {
     'about.text': 'FlashMail ist ein temporärer E‑Mail‑Dienst. Kein Login, kein Tracking – nur Privatsphäre.',
     'privacy.title': 'Datenschutzerklärung',
     'privacy.text': `
-      <p><strong>Gültig ab:</strong> 7. Mai 2025</p>
+      <p><strong>Gültig ab:</strong> 7. Mai 2025</p>
       <ul>
         <li><strong>Keine Cookies.</strong> Wir verwenden keine Cookies oder lokalen Speicher.</li>
         <li><strong>Keine persönlichen Daten.</strong> Wir erfassen oder speichern keine persönlichen Informationen.</li>
@@ -215,10 +238,13 @@ const i18n = {
       <p>Das war’s. Genieße deine Privatsphäre. 🚀</p>
     `,
     'toast.newMessage': 'Neue Nachricht erhalten',
+    'toast.copied': 'Kopiert!',
     'btn.close': 'Postfach schließen',
     'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
     'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen?'
   },
+
+  /* ---------- Russian ------------------------------------ */
   ru: {
     title: 'FlashMail',
     'header.title': 'Самый простой сервис временной электронной почты.',
@@ -246,7 +272,7 @@ const i18n = {
     'about.text': 'FlashMail — это одноразовая электронная почта. Без регистрации, без слежки. Только конфиденциальность.',
     'privacy.title': 'Политика конфиденциальности',
     'privacy.text': `
-      <p><strong>Дата вступления в силу:</strong> 7 мая 2025 г.</p>
+      <p><strong>Дата вступления в силу:</strong> 7 мая 2025 г.</p>
       <ul>
         <li><strong>Без куки.</strong> Мы не используем куки и не храним данные в браузере.</li>
         <li><strong>Без личных данных.</strong> Мы не собираем и не храним личную информацию.</li>
@@ -257,246 +283,194 @@ const i18n = {
       <p>Вот и всё. Наслаждайтесь конфиденциальностью. 🚀</p>
     `,
     'toast.newMessage': 'Получено новое сообщение',
+    'toast.copied': 'Скопировано!',
     'btn.close': 'Закрыть ящик',
     'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
     'confirm.close': 'Закрыть ящик и удалить все сообщения?'
   }
 };
-/* ============================================================== */
-/*  Locale / translation helpers                                  */
-/* ============================================================== */
-function getLocale(code) {
-  return i18n[code] ? code : 'en';
-}
+
+/* ==========================================================
+   2.  Pure helper functions (no DOM access)                 
+   ========================================================== */
+function getLocale(code){ return i18n[code] ? code : 'en'; }
 let savedLang = localStorage.getItem('flashmail-lang') || 'en';
 let locale    = getLocale(savedLang);
 
-function t(key) {
-  return i18n[locale]?.[key] || i18n.en[key] || '';
+function t(key){ return i18n[locale]?.[key] || i18n.en[key] || ''; }
+
+function makeInboxId(){
+  const n = Math.floor(Math.random() * 10**CONFIG.idLength);
+  return CONFIG.idPrefix + String(n).padStart(CONFIG.idLength,'0');
 }
 
-function applyTranslations() {
-  /* Replace innerHTML of every element with a data‑i18n attribute */
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const txt = t(el.getAttribute('data-i18n'));
-    if (txt) el.innerHTML = txt;
-  });
+function escapeHTML(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
 }
-
-/* language dropdown -------------------------------------------- */
-const langSelect = document.getElementById('lang-select');
-if (langSelect) {
-  langSelect.value = savedLang;
-  langSelect.addEventListener('change', () => {
-    localStorage.setItem('flashmail-lang', langSelect.value);
-    locale = getLocale(langSelect.value);
-    applyTranslations();
-  });
-}
-applyTranslations();
-
-/* ============================================================== */
-/*  UI helpers                                                    */
-/* ============================================================== */
-
-function showToast() {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.textContent = t('toast.newMessage');
-  toast.classList.remove('hidden');
-  toast.classList.add('show');
-}
-/* copy-to‑clipboard ---------------------------------------------------*/
-function copyEmail(){
-  const addr=document.getElementById('email-address').textContent;
-  if(!addr) return;
-  navigator.clipboard.writeText(addr).then(showCopiedToast);
-}
-function showCopiedToast(){
-  const toast=document.getElementById('toast');
-  toast.textContent='Copied!';          // simples e curto
-  toast.classList.remove('hidden');
-  toast.classList.add('show');
-  setTimeout(()=>toast.classList.remove('show'),1500);
-}
-
-/* -------------------------------------------------------------- */
-/*  Tab navigation (untouched)                                    */
-/* -------------------------------------------------------------- */
-const tabs     = document.querySelectorAll('.main-nav .tab');
-const sections = document.querySelectorAll('.content, .inbox');
-
-function showSection(id, scroll = false) {
-  sections.forEach(s => s.classList.add('hidden'));
-  if (id === 'mailbox-area') {
-    document.querySelector('#mailbox-area .inbox').classList.remove('hidden');
-  }
-  const section = document.getElementById(id);
-  if (section) {
-    section.classList.remove('hidden');
-    if (scroll) {
-      setTimeout(() => {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    }
-  }
-  tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-}
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', e => {
-    e.preventDefault();
-    const tgt = tab.dataset.target;
-    history.replaceState(null, '', `#${tgt}`);
-    showSection(tgt, true);
-  });
-});
-showSection(location.hash.slice(1) || 'mailbox-area');
-
-/* current year in footer */
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ============================================================== */
-/*  Inbox helpers                                                 */
-/* ============================================================== */
-function makeInboxId() {
-  const num = Math.floor(Math.random() * Math.pow(10, CONFIG.idLength));
-  return CONFIG.idPrefix + String(num).padStart(CONFIG.idLength, '0');
-}
-
-function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-/* -------------------------------------------------------------- */
-/*  Countdown timer (20 min)                                      */
-/* -------------------------------------------------------------- */
-let remaining, timerInterval;
-function startTimer() {
-  remaining = CONFIG.autoStopAfter / 1000;
-  const timerEl = document.getElementById('timer');
-  timerEl.classList.remove('hidden');
-  timerEl.textContent = formatTime(remaining);
-
-  timerInterval = setInterval(() => {
-    remaining--;
-    if (remaining <= 0) clearInbox();
-    timerEl.textContent = formatTime(remaining);
-  }, 1_000);
-}
-function formatTime(sec) {
-  const m = String(Math.floor(sec / 60)).padStart(2, '0');
-  const s = String(sec % 60).padStart(2, '0');
+function formatTime(sec){
+  const m = String(Math.floor(sec/60)).padStart(2,'0');
+  const s = String(sec%60).padStart(2,'0');
   return `${m}:${s}`;
 }
 
-/* ============================================================== */
-/*  Main logic                                                    */
-/* ============================================================== */
-let inboxActive   = false;  // prevents double create
-let lastCount     = 0;      // messages already shown
-let currentId     = null;   // active inbox id
+/* ==========================================================
+   3.  Runtime state                                        
+   ========================================================== */
+let inboxActive   = false;     // prevents concurrent inboxes
+let currentId     = null;      // currently active inbox ID
+let lastCount     = 0;         // # msgs already displayed
+let timerInterval = null;      // countdown setInterval
+let _poller = null, _stopPoll = null;  // polling timers
 
-/* stop any running timers / intervals */
-function resetTimers() {
-  if (window._poller)   clearInterval(window._poller);
-  if (window._stopPoll) clearTimeout(window._stopPoll);
-  if (timerInterval)    clearInterval(timerInterval);
+function resetTimers(){
+  if(_poller)   clearInterval(_poller);
+  if(_stopPoll) clearTimeout(_stopPoll);
+  if(timerInterval) clearInterval(timerInterval);
+  _poller = _stopPoll = timerInterval = null;
 }
 
-/* render message list                                            */
-function renderMessages(msgs) {
+/* ==========================================================
+   4.  DOM‑dependent helpers                                
+   ========================================================== */
+function applyTranslations(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const txt = t(el.getAttribute('data-i18n'));
+    if(txt) el.innerHTML = txt;
+  });
+}
+
+/* ------------------ toast ------------------------------- */
+function toast(textKey){
+  const el = document.getElementById('toast');
+  if(!el) return;
+  el.textContent = t(textKey);
+  el.classList.remove('hidden'); el.classList.add('show');
+  el.onclick = ()=>{ el.classList.remove('show'); el.classList.add('hidden'); el.onclick=null; };
+}
+
+/* copy-to‑clipboard feedback */
+function showCopied(){ toast('toast.copied'); }
+
+/* ------------------ message list ------------------------ */
+function renderMessages(msgs){
   const box = document.getElementById('messages');
-  box.innerHTML = '';
-
-  msgs.forEach(msg => {
-    const line = document.createElement('div');
-    line.className = 'message-summary';
-    line.innerHTML = `
-      <span><strong>${escapeHTML(msg.subject || '(no subject)')}</strong> — ${escapeHTML(msg.sender)}</span>
-      <span>▼</span>`;          // simple toggle
-
-    /* on click → expand full body */
-    line.onclick = () => {
-      const detail = document.createElement('div');
-      detail.className = 'message-detail';
-      detail.innerHTML = `
-        <h3>${escapeHTML(msg.subject || '(no subject)')}</h3>
-        <p><em>${escapeHTML(msg.sender)}</em></p>
-        <p>${escapeHTML(msg.body).replace(/\n/g,'<br>')}</p>`;
-      line.replaceWith(detail);
-      detail.scrollIntoView({ behavior:'smooth', block:'start' });
+  box.innerHTML='';
+  msgs.forEach(m=>{
+    const line=document.createElement('div');
+    line.className='message-summary';
+    line.innerHTML=`<span><strong>${escapeHTML(m.subject||'(no subject)')}</strong> — ${escapeHTML(m.sender)}</span><span>▼</span>`;
+    line.onclick=()=>{
+      const det=document.createElement('div');
+      det.className='message-detail';
+      det.innerHTML=`<h3>${escapeHTML(m.subject||'(no subject)')}</h3><p><em>${escapeHTML(m.sender)}</em></p><p>${escapeHTML(m.body).replace(/\n/g,'<br>')}</p>`;
+      line.replaceWith(det);
+      det.scrollIntoView({behavior:'smooth',block:'start'});
     };
     box.appendChild(line);
   });
 }
 
-/* fetch messages for current inbox                              */
-async function fetchMessages() {
-  if (!currentId) return;
-  try {
-    const res  = await fetch(`${CONFIG.apiBase}/messages/${currentId}`);
-    if (!res.ok) throw new Error(res.status);
-    const msgs = await res.json();
+/* ------------------ countdown timer --------------------- */
+function startTimer(){
+  const tEl=document.getElementById('timer');
+  let remain=CONFIG.autoStopAfter/1_000;
+  tEl.classList.remove('hidden');
+  tEl.textContent=formatTime(remain);
+  timerInterval=setInterval(()=>{
+    remain--;
+    if(remain<=0) clearInbox();
+    tEl.textContent=formatTime(remain);
+  },1_000);
+}
 
-    if (msgs.length > lastCount) {
-      showToast();
-      lastCount = msgs.length;
-    }
+/* ==========================================================
+   5.  API polling                                          
+   ========================================================== */
+async function fetchMessages(){
+  if(!currentId)return;
+  try{
+    const r=await fetch(`${CONFIG.apiBase}/messages/${currentId}`);
+    if(!r.ok) throw new Error(r.status);
+    const msgs=await r.json();
+    if(msgs.length>lastCount){ toast('toast.newMessage'); lastCount=msgs.length;}
     renderMessages(msgs);
-  } catch (err) {
-    console.warn('Polling error (ignored):', err);
-  }
+  }catch(e){ console.warn('poll error',e); }
 }
 
-/* clear UI + timers + state                                     */
-function clearInbox() {
+/* ==========================================================
+   6.  UI state transitions                                 
+   ========================================================== */
+function clearInbox(){
   resetTimers();
-  inboxActive = false;
-  currentId   = null;
-
+  inboxActive=false; currentId=null;
   document.getElementById('btn-create').classList.remove('hidden');
-  document.getElementById('inbox'      ).classList.add   ('hidden');
-  document.getElementById('btn-close'  ).classList.add   ('hidden');
-  document.getElementById('timer'      ).classList.add   ('hidden');
-  document.getElementById('messages'   ).innerHTML = '';
-  document.getElementById('closed-msg' ).classList.remove('hidden');
+  document.getElementById('btn-close' ).classList.add   ('hidden');
+  document.getElementById('inbox'     ).classList.add   ('hidden');
+  document.getElementById('timer'     ).classList.add   ('hidden');
+  document.getElementById('messages'  ).innerHTML='';
+  document.getElementById('closed-msg').classList.remove('hidden');
 }
 
-/* -------------------------------------------------------------- */
-/*  “Create Inbox” button                                         */
-/* -------------------------------------------------------------- */
-document.getElementById('btn-create').addEventListener('click', () => {
-  if (inboxActive) return;      // ignore double‑click
-  inboxActive = true;
-  resetTimers();
+function createInbox(){
+  if(inboxActive) return;
+  inboxActive=true; resetTimers();
 
-  /* UI initialisation */
-  document.getElementById('btn-copy').onclick = copyEmail;
-  document.getElementById('btn-create').classList.add('hidden');
-  document.getElementById('closed-msg').classList.add   ('hidden');
+  document.getElementById('btn-create').classList.add   ('hidden');
   document.getElementById('btn-close' ).classList.remove('hidden');
-  document.getElementById('messages'  ).innerHTML = '';
+  document.getElementById('closed-msg').classList.add   ('hidden');
+  document.getElementById('messages'  ).innerHTML='';
 
-  /* generate id, show address */
-  currentId = makeInboxId();
-  document.getElementById('email-address').textContent =
-        `${currentId}@${CONFIG.inboxDomain}`;
+  currentId=makeInboxId();
+  document.getElementById('email-address').textContent=`${currentId}@${CONFIG.inboxDomain}`;
   document.getElementById('inbox').classList.remove('hidden');
 
-  /* start countdown + first fetch + polling */
-  startTimer();
-  lastCount    = 0;
-  fetchMessages();                               // immediate
-  window._poller   = setInterval(fetchMessages, CONFIG.pollInterval);
-  window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
-});
+  startTimer(); lastCount=0; fetchMessages();
+  _poller=setInterval(fetchMessages,CONFIG.pollInterval);
+  _stopPoll=setTimeout(clearInbox,CONFIG.autoStopAfter);
+}
 
-/* -------------------------------------------------------------- */
-/*  “Close Inbox” button                                          */
-/* -------------------------------------------------------------- */
-document.getElementById('btn-close').addEventListener('click', () => {
-  if (confirm(t('confirm.close'))) clearInbox();
+/* ==========================================================
+   7.  Navigation / section helpers                         
+   ========================================================== */
+function showSection(id,scroll=false){
+  document.querySelectorAll('.content, .inbox').forEach(s=>s.classList.add('hidden'));
+  if(id==='mailbox-area'){ document.querySelector('#mailbox-area .inbox').classList.remove('hidden'); }
+  const sec=document.getElementById(id);
+  if(sec){
+    sec.classList.remove('hidden');
+    if(scroll){ setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),50);}
+  }
+  document.querySelectorAll('.main-nav .tab').forEach(t=>t.classList.toggle('active',t.dataset.target===id));
+}
+
+/* ==========================================================
+   8.  DOMContentLoaded – single entry point                
+   ========================================================== */
+window.addEventListener('DOMContentLoaded',()=>{
+  /* translations + static text */
+  applyTranslations();
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  /* language switcher */
+  const langSel=document.getElementById('lang-select');
+  langSel.value=savedLang;
+  langSel.addEventListener('change',()=>{
+    localStorage.setItem('flashmail-lang',langSel.value);
+    locale=getLocale(langSel.value); applyTranslations();
+  });
+
+  /* buttons */
+  document.getElementById('btn-copy'  ).addEventListener('click',()=>{const addr=document.getElementById('email-address').textContent;if(addr)navigator.clipboard.writeText(addr).then(showCopied);});
+  document.getElementById('btn-create').addEventListener('click',createInbox);
+  document.getElementById('btn-close' ).addEventListener('click',()=>{ if(confirm(t('confirm.close'))) clearInbox(); });
+
+  /* nav tabs */
+  document.querySelectorAll('.main-nav .tab').forEach(tab=>tab.addEventListener('click',e=>{
+    e.preventDefault(); const tgt=e.currentTarget.dataset.target; history.replaceState(null,'',`#${tgt}`); showSection(tgt,true);
+  }));
+
+  /* open right section on load */
+  showSection(location.hash.slice(1)||'mailbox-area');
 });
