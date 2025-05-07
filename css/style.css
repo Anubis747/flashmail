@@ -36,13 +36,12 @@ body {
   background-color: var(--color-primary);
   color: var(--text-light);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
 }
 .site-header .logo {
   font-size: 1.5rem;
   font-weight: 700;
 }
-
-/* Navigation */
 .main-nav {
   margin-top: 0.5rem;
 }
@@ -60,24 +59,41 @@ body {
   transition: background-color 0.2s;
 }
 .main-nav .tab:hover {
-  background-color: rgba(122, 211, 255, 0.2);
+  background-color: rgba(255,255,255,0.2);
 }
 .main-nav .tab.active {
   background-color: var(--color-accent);
   color: var(--text-dark);
 }
 
-/* Cards */
+/* Card base */
 .card {
   background-color: var(--color-secondary);
   border-radius: var(--radius);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   padding: 2rem;
-  text-align: center;
   margin: 2rem 0;
 }
 
-/* Buttons */
+/* Cards’ headings & content */
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+.card p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.card ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+.card ul li {
+  margin-bottom: 0.75rem;
+}
+
+/* Button */
 .btn-primary {
   background-color: var(--color-accent);
   color: var(--text-light);
@@ -93,4 +109,59 @@ body {
 }
 
 /* Inbox */
-.in
+.inbox {
+  margin-top: 1.5rem;
+}
+.email-code {
+  display: block;
+  margin: 0.5rem auto;
+  background: var(--bg-light);
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+.inbox-expires {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+.message-list {
+  list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.message-list li {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Coffee Card */
+.coffee-section {
+  display: flex;
+  justify-content: center;
+}
+.coffee-card {
+  max-width: 320px;
+  text-align: center;
+}
+.coffee-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.coffee-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
