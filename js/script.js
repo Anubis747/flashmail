@@ -37,6 +37,8 @@ const i18n = {
     'privacy.title': 'Privacy Policy',
     'privacy.text': '',
     'toast.newMessage': 'New message received',
+    'btn.close': 'Close Inbox',
+    'inbox.closed': 'Inbox closed. All messages deleted.',
     'confirm.close': 'Close the inbox and delete all messages?'
   },
   pt: {
@@ -67,6 +69,8 @@ const i18n = {
     'privacy.title': 'Política de Privacidade',
     'privacy.text': '',
     'toast.newMessage': 'Nova mensagem recebida',
+    'btn.close': 'Encerrar Caixa',
+    'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
   },
   es: {
@@ -97,6 +101,8 @@ const i18n = {
     'privacy.title': 'Política de Privacidad',
     'privacy.text': '',
     'toast.newMessage': 'Nuevo mensaje recibido',
+    'btn.close': 'Cerrar Bandeja',
+    'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
     'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
   },
   fr: {
@@ -127,6 +133,8 @@ const i18n = {
     'privacy.title': 'Politique de confidentialité',
     'privacy.text': '',
     'toast.newMessage': 'Nouveau message reçu',
+    'btn.close': 'Fermer la boîte',
+    'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
     'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
   },
   de: {
@@ -157,6 +165,8 @@ const i18n = {
     'privacy.title': 'Datenschutzerklärung',
     'privacy.text': '',
     'toast.newMessage': 'Neue Nachricht erhalten',
+    'btn.close': 'Postfach schließen',
+    'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
     'confirm.close': 'Postfach schließen und alle Nachrichten löschen?'
   },
   ru: {
@@ -187,6 +197,8 @@ const i18n = {
     'privacy.title': 'Политика конфиденциальности',
     'privacy.text': '',
     'toast.newMessage': 'Новое сообщение получено',
+    'btn.close': 'Закрыть ящик',
+    'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
     'confirm.close': 'Закрыть почтовый ящик и удалить все сообщения?'
   }
 };
