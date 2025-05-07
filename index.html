@@ -58,7 +58,6 @@
 </p>
 </section>
 
-
   <div class="lang-inline">
     <label for="lang-select" class="sr-only">Language</label>
     <select id="lang-select" aria-label="Select language">
@@ -147,18 +146,21 @@
       <p>&copy; <span id="year"></span> FlashMail</p>
     </div>
   </footer>
-<div id="toast"
-     class="hidden"
-     role="alert"
-     aria-live="assertive"
-     data-i18n="toast.newMessage"
-     style="position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
-            background: var(--color-primary); color: white; padding: 0.75rem 1.25rem;
-            border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: opacity 0.3s; z-index: 1000;">
+<div id="toast" class="hidden" data-i18n="toast.newMessage" style="
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: opacity 0.3s;
+  z-index: 1000;
+">
   New message received
 </div>
-
-  <script src="js/script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
