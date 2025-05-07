@@ -1,7 +1,7 @@
 // script.js
 const CONFIG = {
   idPrefix: 'flash',
-  idLength: 8,
+  idLength: 5,
   pollInterval: 5000,
   autoStopAfter: 20 * 60 * 1000,
   apiBase: 'https://api.flashmail.win',
@@ -302,17 +302,9 @@ applyTranslations();
 function showToast() {
   const toast = document.getElementById('toast');
   if (!toast) return;
-
   toast.textContent = t('toast.newMessage');
   toast.classList.remove('hidden');
   toast.classList.add('show');
-
-  // click = close
-  toast.onclick = () => {
-    toast.classList.remove('show');
-    toast.classList.add('hidden');
-    toast.onclick = null;        // detach handler
-  };
 }
 
 /* -------------------------------------------------------------- */
@@ -452,6 +444,7 @@ function clearInbox() {
   inboxActive = false;
   currentId   = null;
 
+  document.getElementById('btn-create').classList.remove('hidden');
   document.getElementById('inbox'      ).classList.add   ('hidden');
   document.getElementById('btn-close'  ).classList.add   ('hidden');
   document.getElementById('timer'      ).classList.add   ('hidden');
@@ -468,6 +461,7 @@ document.getElementById('btn-create').addEventListener('click', () => {
   resetTimers();
 
   /* UI initialisation */
+  document.getElementById('btn-create').classList.add('hidden');
   document.getElementById('closed-msg').classList.add   ('hidden');
   document.getElementById('btn-close' ).classList.remove('hidden');
   document.getElementById('messages'  ).innerHTML = '';
