@@ -7,9 +7,8 @@ const CONFIG = {
   apiBase: 'https://api.flashmail.win',
   inboxDomain: 'mg.flashmail.win'
 };
-let inboxActive = false;
 
-// i18n translations (inclui privacy.text completo em cada idioma)
+// i18n translations
 const i18n = {
   en: {
     title: 'FlashMail',
