@@ -221,3 +221,18 @@ body {
   white-space: nowrap;
   border: 0;
 }
+.lang-inline {
+  text-align: center;
+  margin: -1rem 0 2rem 0;
+}
+
+.lang-inline select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  background-color: var(--color-secondary);
+  color: var(--text-dark);
+  cursor: pointer;
+}
