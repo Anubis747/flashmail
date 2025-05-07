@@ -216,6 +216,9 @@ function applyTranslations() {
     const txt = t(el.getAttribute('data-i18n'));
     if (txt) el.textContent = txt;
   });
+
+  const toast = document.getElementById('toast');
+  if (toast) toast.textContent = t('toast.newMessage');
 }
 
 // Language switcher
