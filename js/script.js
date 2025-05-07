@@ -36,6 +36,7 @@ const i18n = {
     'about.text': 'FlashMail is a disposable email service. No login, no tracking. Just privacy.',
     'privacy.title': 'Privacy Policy',
     'privacy.text': ''
+    'confirm.close': 'Close the inbox and delete all messages?'
   },
   pt: {
     title: 'FlashMail',
@@ -64,6 +65,7 @@ const i18n = {
     'about.text': 'FlashMail é um serviço de e-mail descartável. Sem login, sem rastreio. Só privacidade.',
     'privacy.title': 'Política de Privacidade',
     'privacy.text': ''
+    'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
   },
   es: {
     title: 'FlashMail',
@@ -92,6 +94,7 @@ const i18n = {
     'about.text': 'FlashMail es un servicio de correo descartable. Sin registro, sin rastreo. Solo privacidad.',
     'privacy.title': 'Política de Privacidad',
     'privacy.text': ''
+    'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
   },
   fr: {
     title: 'FlashMail',
@@ -120,6 +123,7 @@ const i18n = {
     'about.text': 'FlashMail est un service d’e-mail jetable. Pas de login. Pas de suivi. Juste la vie privée.',
     'privacy.title': 'Politique de confidentialité',
     'privacy.text': ''
+    'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
   },
   de: {
     title: 'FlashMail',
@@ -148,6 +152,7 @@ const i18n = {
     'about.text': 'FlashMail ist ein Einweg-E-Mail-Dienst. Kein Login. Kein Tracking. Nur Privatsphäre.',
     'privacy.title': 'Datenschutzerklärung',
     'privacy.text': ''
+    'confirm.close': 'Postfach schließen und alle Nachrichten löschen?'
   },
   ru: {
     title: 'FlashMail',
@@ -176,6 +181,7 @@ const i18n = {
     'about.text': 'FlashMail — одноразовый почтовый сервис. Без логина. Без отслеживания. Только приватность.',
     'privacy.title': 'Политика конфиденциальности',
     'privacy.text': ''
+    'confirm.close': 'Закрыть почтовый ящик и удалить все сообщения?'
   }
 };
 // Locale helpers
@@ -372,9 +378,10 @@ document.getElementById('btn-create').addEventListener('click', () => {
   window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
 });
 
-// Close inbox button
 document.getElementById('btn-close').addEventListener('click', () => {
-  if (window.confirm('Encerrar a inbox e apagar todas as mensagens?')) {
+  const msg = t('confirm.close');
+  if (window.confirm(msg)) {
     clearInbox();
   }
 });
+
