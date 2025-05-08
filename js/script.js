@@ -436,7 +436,11 @@ function createInbox(){
    ========================================================== */
 function showSection(id,scroll=false){
   document.querySelectorAll('.content, .inbox').forEach(s=>s.classList.add('hidden'));
-  if(id==='mailbox-area'){ document.querySelector('#mailbox-area .inbox').classList.remove('hidden'); }
+    if (inboxActive) {
+    inboxDiv.classList.remove('hidden');
+  } else {
+    inboxDiv.classList.add('hidden');
+  }
   const sec=document.getElementById(id);
   if(sec){
     sec.classList.remove('hidden');
