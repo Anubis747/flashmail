@@ -26,7 +26,7 @@ const i18n = {
     'nav.mailbox': 'Inbox',
     'nav.faq': 'FAQ',
     'nav.about': 'About',
-    'toast.copied': 'Address copied!',
+    'copied': 'Copied to clipboard',
     'nav.privacy': 'Privacy',
     'btn.create': 'Create Inbox',
     'inbox.label': 'Your email:',
@@ -59,7 +59,6 @@ const i18n = {
       <p>That’s it. Enjoy your privacy. 🚀</p>
     `,
     'toast.newMessage': 'New message received',
-    'toast.copied': 'Copied!',
     'btn.close': 'Close Inbox',
     'inbox.closed': 'Inbox closed. All messages deleted.',
     'confirm.close': 'Close the inbox and delete all messages?'
@@ -72,7 +71,7 @@ const i18n = {
     'nav.mailbox': 'Principal',
     'nav.faq': 'FAQ',
     'nav.about': 'Sobre',
-    'toast.copied': 'Endereço copiado!',
+    'copied': 'Copiado para a área de transferência',
     'nav.privacy': 'Privacidade',
     'btn.create': 'Criar Email',
     'inbox.label': 'Seu e‑mail:',
@@ -105,7 +104,6 @@ const i18n = {
       <p>É isso. Aproveite sua privacidade. 🚀</p>
     `,
     'toast.newMessage': 'Nova mensagem recebida',
-    'toast.copied': 'Copiado!',
     'btn.close': 'Encerrar Caixa',
     'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
@@ -122,7 +120,7 @@ const i18n = {
     'btn.create': 'Crear bandeja',
     'inbox.label': 'Tu correo:',
     'inbox.expires': 'Expira en 20 minutos.',
-    'toast.copied': 'Dirección copiada!',
+    'copied': 'Copiado al portapapeles',
     'support.title': '¿Te gustó nuestro servicio?',
     'support.text': 'Considera apoyarnos con el botón de abajo.',
     'faq.title': 'Preguntas Frecuentes',
@@ -151,7 +149,6 @@ const i18n = {
       <p>Eso es todo. Disfruta tu privacidad. 🚀</p>
     `,
     'toast.newMessage': 'Nuevo mensaje recibido',
-    'toast.copied': '¡Copiado!',
     'btn.close': 'Cerrar bandeja',
     'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
     'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
@@ -169,7 +166,7 @@ const i18n = {
     'inbox.label': 'Votre e‑mail :',
     'inbox.expires': 'Expire dans 20 minutes.',
     'support.title': 'Vous aimez notre service ?',
-    'toast.copied': 'Adresse copiée !',
+    'copied': 'Copié dans le presse-papiers',
     'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci‑dessous.',
     'faq.title': 'Foire aux questions',
     'faq.q1': 'Combien de temps la boîte de réception reste‑t‑elle active ?',
@@ -197,7 +194,6 @@ const i18n = {
       <p>C’est tout. Profitez de votre confidentialité. 🚀</p>
     `,
     'toast.newMessage': 'Nouveau message reçu',
-    'toast.copied': 'Copié !',
     'btn.close': 'Fermer la boîte',
     'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
     'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
@@ -243,7 +239,7 @@ const i18n = {
       <p>Das war’s. Genieße deine Privatsphäre. 🚀</p>
     `,
     'toast.newMessage': 'Neue Nachricht erhalten',
-    'toast.copied': 'Kopiert!',
+    'copied': 'In die Zwischenablage kopiert',
     'btn.close': 'Postfach schließen',
     'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
     'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen?'
@@ -289,7 +285,7 @@ const i18n = {
       <p>Вот и всё. Наслаждайтесь конфиденциальностью. 🚀</p>
     `,
     'toast.newMessage': 'Получено новое сообщение',
-    'toast.copied': 'Скопировано!',
+    'copied': 'Скопировано в буфер обмена',
     'btn.close': 'Закрыть ящик',
     'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
     'confirm.close': 'Закрыть ящик и удалить все сообщения?'
