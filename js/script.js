@@ -372,34 +372,59 @@ function copyEmail() {
 document.getElementById('btn-copy').addEventListener('click', copyEmail);
 
 /* ------------------ message list ------------------------ */
-// Render email summaries and toggle to show full detail on click without auto-scrolling
+/**
+ * Render a list of messages with manual open/close toggles.
+ * @param {Array} msgs — array of { subject, sender, body }
+ */
 function renderMessages(msgs) {
   const box = document.getElementById('messages');
   box.innerHTML = '';
 
   msgs.forEach(m => {
-    // Create summary line
-    const line = document.createElement('div');
-    line.className = 'message-summary';
-    line.innerHTML = `
-      <span><strong>${escapeHTML(m.subject || '(no subject)')}</strong> — ${escapeHTML(m.sender)}</span>
-      <span>▼</span>
+    // 1. wrapper for summary + detail
+    const wrapper = document.createElement('div');
+    wrapper.className = 'message-item';
+
+    // 2. summary row with "▼" button
+    const summary = document.createElement('div');
+    summary.className = 'message-summary';
+    summary.innerHTML = `
+      <span>
+        <strong>${escapeHTML(m.subject || '(no subject)')}</strong> — ${escapeHTML(m.sender)}
+      </span>
+    `;
+    const openBtn = document.createElement('button');
+    openBtn.className = 'toggle-arrow';
+    openBtn.setAttribute('aria-label', 'Open message');
+    openBtn.textContent = '▼';
+    summary.appendChild(openBtn);
+
+    // 3. detail view (hidden by default) with "▲" button
+    const detail = document.createElement('div');
+    detail.className = 'message-detail hidden';
+    detail.innerHTML = `
+      <button class="toggle-arrow" aria-label="Close message">▲</button>
+      <h3>${escapeHTML(m.subject || '(no subject)')}</h3>
+      <p><em>From: ${escapeHTML(m.sender)}</em></p>
+      <p>${escapeHTML(m.body).replace(/\n/g, '<br>')}</p>
     `;
 
-    // Toggle detail view on click
-    line.onclick = () => {
-      const det = document.createElement('div');
-      det.className = 'message-detail';
-      det.innerHTML = `
-        <h3>${escapeHTML(m.subject || '(no subject)')}</h3>
-        <p><em>From: ${escapeHTML(m.sender)}</em></p>
-        <p>${escapeHTML(m.body).replace(/\n/g, '<br>')}</p>
-      `;
-      line.replaceWith(det);
-      // Removed det.scrollIntoView to leave scrolling under user control
-    };
+    // 4. open handler: hide summary, show detail
+    openBtn.addEventListener('click', () => {
+      summary.classList.add('hidden');
+      detail.classList.remove('hidden');
+    });
 
-    box.appendChild(line);
+    // 5. close handler: hide detail, show summary
+    detail.querySelector('.toggle-arrow').addEventListener('click', () => {
+      detail.classList.add('hidden');
+      summary.classList.remove('hidden');
+    });
+
+    // 6. assemble and append
+    wrapper.appendChild(summary);
+    wrapper.appendChild(detail);
+    box.appendChild(wrapper);
   });
 }
 
