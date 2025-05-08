@@ -310,25 +310,26 @@ body {
 #btn-close:hover {
   background: #b71c1c;
 }
-.email-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:0.5rem;
-}
+/* copy icon next to the address */
+.email-row { position: relative; display: inline-block; }
 
-.copy-btn{
-  background:var(--color-primary);
-  color:var(--text-light);
-  border:none;
-  padding:0.4rem 0.6rem;
-  font-size:1rem;
-  border-radius:var(--radius);
-  cursor:pointer;
-  transition:opacity .2s;
+.email-code { padding-right: 2.2rem; }
+
+.copy-btn {
+  --s: 1.7rem;
+  position: absolute; top: .25rem; right: .25rem;
+  width: var(--s); height: var(--s);
+  background: none; border: none; font-size: var(--s);
+  opacity: .35; cursor: pointer; transition: opacity .15s, transform .15s;
 }
-.copy-btn:hover{opacity:.85;}
-.copy-btn:active{opacity:.7;}
+.copy-btn:hover,
+.copy-btn:focus { opacity: 1; transform: scale(1.05); }
+
+.copy-btn.copied { animation: flash .75s ease-out; }
+@keyframes flash {
+  0% { transform: scale(1.1); }
+  80%{ transform: scale(.95); }
+}
 .btn-danger{
   background:#d9534f;
   color:#fff;
