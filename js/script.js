@@ -111,7 +111,7 @@ const i18n = {
     'toast.newMessage': 'Nova mensagem recebida',
     'btn.close': 'Encerrar Caixa',
     'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
-    'confirm.close': 'Encerrar a inbox e apagar todas as mensagens? Você só poderá abrir uma nova caixa após 15 minutos.''
+    'confirm.close': 'Encerrar a inbox e apagar todas as mensagens? Você só poderá abrir uma nova caixa após 15 minutos.'
   },
 
   /* ---------- Spanish ------------------------------------ */
