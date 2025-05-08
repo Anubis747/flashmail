@@ -14,6 +14,8 @@ const CONFIG = {
   apiBase       : 'https://api.flashmail.win',
   inboxDomain   : 'mg.flashmail.win'
 };
+const inboxDiv = document.querySelector('#mailbox-area .inbox');
+const tabs     = document.querySelectorAll('.main-nav .tab');
 
 /* ----------------------------------------------------------
    1.  Translations                                          
@@ -449,19 +451,32 @@ function createInbox(){
 /* ==========================================================
    7.  Navigation / section helpers                         
    ========================================================== */
-function showSection(id,scroll=false){
-  document.querySelectorAll('.content, .inbox').forEach(s=>s.classList.add('hidden'));
-    if (inboxActive) {
+function showSection(id, scroll = false) {
+  // 1. hide all the standalone “content” sections (FAQ, About, Privacy)
+  document.querySelectorAll('.content').forEach(el => el.classList.add('hidden'));
+
+  // 2. show or hide the inbox panel depending on whether
+  //    an inbox is active OR the user explicitly clicked “Inbox”
+  if (inboxActive || id === 'mailbox-area') {
     inboxDiv.classList.remove('hidden');
   } else {
     inboxDiv.classList.add('hidden');
   }
-  const sec=document.getElementById(id);
-  if(sec){
-    sec.classList.remove('hidden');
-    if(scroll){ setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),50);}
+
+  // 3. if the clicked tab is not “Inbox”, reveal that section
+  if (id !== 'mailbox-area') {
+    const sec = document.getElementById(id);
+    if (sec) {
+      sec.classList.remove('hidden');
+      // optional smooth scroll
+      if (scroll) {
+        setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+      }
+    }
   }
-  document.querySelectorAll('.main-nav .tab').forEach(t=>t.classList.toggle('active',t.dataset.target===id));
+
+  // 4. update the “active” state on your nav buttons
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
 }
 
 /* ==========================================================
