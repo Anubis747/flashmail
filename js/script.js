@@ -11,6 +11,7 @@ const CONFIG = {
   idLength      : 5,                   // # of random digits
   pollInterval  : 5_000,               // ms between API polls
   autoStopAfter : 20 * 60 * 1_000,     // inbox lifetime (20 min)
+  cooldownAfter : 15 * 60 * 1_000,     // cooldown for a new account
   apiBase       : 'https://api.flashmail.win',
   inboxDomain   : 'mg.flashmail.win'
 };
@@ -419,33 +420,87 @@ async function fetchMessages(){
 /* ==========================================================
    6.  UI state transitions                                 
    ========================================================== */
-function clearInbox(){
-  resetTimers();
-  inboxActive=false; currentId=null;
-  document.getElementById('btn-create').classList.remove('hidden');
-  document.getElementById('btn-close' ).classList.add   ('hidden');
-  document.getElementById('inbox'     ).classList.add   ('hidden');
-  document.getElementById('timer'     ).classList.add   ('hidden');
-  document.getElementById('messages'  ).innerHTML='';
-  document.getElementById('closed-msg').classList.remove('hidden');
+/**
+ * Clears the current inbox UI and starts the cooldown before
+ * allowing the user to create a new inbox.
+ */
+function clearInbox() {
+  resetTimers();            // stop any polling/timers
+  inboxActive = false;      // mark inbox as inactive
+  currentId   = null;       // clear stored inbox ID
+  lastClear   = Date.now(); // record when we cleared
+
+  // Show “Create Inbox” button and disable it for cooldown
+  const createBtn = document.getElementById('btn-create');
+  createBtn.classList.remove('hidden');
+  createBtn.disabled = true;
+  createBtn.classList.add('disabled'); // apply .disabled CSS style
+
+  // Re-enable after CONFIG.cooldownAfter milliseconds
+  setTimeout(() => {
+    createBtn.disabled = false;
+    createBtn.classList.remove('disabled');
+  }, CONFIG.cooldownAfter);
+
+  // Hide other controls and show closed message
+  document.getElementById('btn-close'   ).classList.add('hidden');
+  document.getElementById('inbox'       ).classList.add('hidden');
+  document.getElementById('timer'       ).classList.add('hidden');
+  document.getElementById('messages'    ).innerHTML = '';
+  document.getElementById('closed-msg'  ).classList.remove('hidden');
 }
+/**
+ * Starts a new inbox session:
+ * - prevents creation if one is already active or if we’re in cooldown
+ * - resets any existing timers/pollers
+ * - updates the UI (hide “Create”, show “Close”, clear messages)
+ * - generates a new inbox ID and displays it
+ * - kicks off the countdown timer and message polling
+ */
+function createInbox() {
+  const createBtn = document.getElementById('btn-create');
 
-function createInbox(){
-  if(inboxActive) return;
-  inboxActive=true; resetTimers();
+  // prevent double-click or creating during cooldown
+  if (inboxActive || createBtn.disabled) return;
 
-  document.getElementById('btn-create').classList.add   ('hidden');
-  document.getElementById('btn-close' ).classList.remove('hidden');
-  document.getElementById('closed-msg').classList.add   ('hidden');
-  document.getElementById('messages'  ).innerHTML='';
+  inboxActive = true;
+  resetTimers();  // stop any previous intervals/timeouts
 
-  currentId=makeInboxId();
-  document.getElementById('email-address').textContent=`${currentId}@${CONFIG.inboxDomain}`;
+  // hide “Create Inbox” button
+  createBtn.classList.add('hidden');
+  // show “Close Inbox” button
+  document.getElementById('btn-close').classList.remove('hidden');
+  // hide the “Inbox closed” message if visible
+  document.getElementById('closed-msg').classList.add('hidden');
+  // clear out any old messages
+  document.getElementById('messages').innerHTML = '';
+
+  // generate and display the new email address
+  currentId = makeInboxId();
+  document.getElementById('email-address').textContent =
+    `${currentId}@${CONFIG.inboxDomain}`;
+  // reveal the inbox container
   document.getElementById('inbox').classList.remove('hidden');
 
-  startTimer(); lastCount=0; fetchMessages();
-  _poller=setInterval(fetchMessages,CONFIG.pollInterval);
-  _stopPoll=setTimeout(clearInbox,CONFIG.autoStopAfter);
+  // start the 20-minute countdown and reset message count
+  startTimer();
+  lastCount = 0;
+  // fetch immediately, then poll at the configured interval
+  fetchMessages();
+  window._poller = setInterval(fetchMessages, CONFIG.pollInterval);
+  // auto-close after CONFIG.autoStopAfter milliseconds
+  window._stopPoll = setTimeout(clearInbox, CONFIG.autoStopAfter);
+}
+
+// Disables the Create button and re-enables after CONFIG.cooldownAfter
+function disableCreateButton() {
+  const btn = document.getElementById('btn-create');
+  btn.disabled = true;
+  btn.classList.add('disabled');
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.classList.remove('disabled');
+  }, CONFIG.cooldownAfter);
 }
 
 /* ==========================================================
