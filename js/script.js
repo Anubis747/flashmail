@@ -26,6 +26,7 @@ const i18n = {
     'nav.mailbox': 'Inbox',
     'nav.faq': 'FAQ',
     'nav.about': 'About',
+    'toast.copied': 'Address copied!',
     'nav.privacy': 'Privacy',
     'btn.create': 'Create Inbox',
     'inbox.label': 'Your email:',
@@ -71,6 +72,7 @@ const i18n = {
     'nav.mailbox': 'Principal',
     'nav.faq': 'FAQ',
     'nav.about': 'Sobre',
+    'toast.copied': 'Endereço copiado!',
     'nav.privacy': 'Privacidade',
     'btn.create': 'Criar Email',
     'inbox.label': 'Seu e‑mail:',
@@ -120,6 +122,7 @@ const i18n = {
     'btn.create': 'Crear bandeja',
     'inbox.label': 'Tu correo:',
     'inbox.expires': 'Expira en 20 minutos.',
+    'toast.copied': 'Dirección copiada!',
     'support.title': '¿Te gustó nuestro servicio?',
     'support.text': 'Considera apoyarnos con el botón de abajo.',
     'faq.title': 'Preguntas Frecuentes',
@@ -166,6 +169,7 @@ const i18n = {
     'inbox.label': 'Votre e‑mail :',
     'inbox.expires': 'Expire dans 20 minutes.',
     'support.title': 'Vous aimez notre service ?',
+    'toast.copied': 'Adresse copiée !',
     'support.text': 'Merci de nous soutenir en cliquant sur le bouton ci‑dessous.',
     'faq.title': 'Foire aux questions',
     'faq.q1': 'Combien de temps la boîte de réception reste‑t‑elle active ?',
@@ -214,6 +218,7 @@ const i18n = {
     'support.text': 'Bitte unterstützen Sie uns über den Button unten.',
     'faq.title': 'Häufig gestellte Fragen',
     'faq.q1': 'Wie lange ist das Postfach aktiv?',
+    'toast.copied': 'Adresse kopiert!',
     'faq.a1': 'Jedes Postfach ist 20 Minuten aktiv, dann werden alle Nachrichten gelöscht.',
     'faq.q2': 'Kann ich die Zeit verlängern?',
     'faq.a2': 'Ja – klicken Sie vor Ablauf erneut auf „Postfach erstellen“. ',
@@ -258,6 +263,7 @@ const i18n = {
     'support.title': 'Понравился наш сервис?',
     'support.text': 'Поддержите нас, нажав на кнопку ниже.',
     'faq.title': 'Часто задаваемые вопросы',
+    'toast.copied': 'Адрес скопирован!',
     'faq.q1': 'Сколько действует адрес электронной почты?',
     'faq.a1': 'Каждый ящик работает 20 минут, затем все сообщения удаляются.',
     'faq.q2': 'Можно ли продлить срок?',
@@ -350,8 +356,13 @@ function toast(textKey){
   el.onclick = ()=>{ el.classList.remove('show'); el.classList.add('hidden'); el.onclick=null; };
 }
 
-/* copy-to‑clipboard feedback */
-function showCopied(){ toast('toast.copied'); }
+function copyEmail() {
+  const addr = document.getElementById('email-address')?.textContent.trim();
+  if (!addr) return;
+  navigator.clipboard.writeText(addr).then(() => {
+    toast('toast.copied'); // reuse your toast function
+  });
+}
 
 /* ------------------ message list ------------------------ */
 function renderMessages(msgs){
@@ -466,7 +477,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   });
 
   /* buttons */
-  document.getElementById('btn-copy'  ).addEventListener('click',()=>{const addr=document.getElementById('email-address').textContent;if(addr)navigator.clipboard.writeText(addr).then(showCopied);});
+  document.getElementById('btn-copy').addEventListener('click', copyEmail);
   document.getElementById('btn-create').addEventListener('click',createInbox);
   document.getElementById('btn-close' ).addEventListener('click',()=>{ if(confirm(t('confirm.close'))) clearInbox(); });
 
