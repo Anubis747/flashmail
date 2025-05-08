@@ -191,24 +191,40 @@ body {
   border-bottom: 1px solid #e0e0e0;
 }
 
-/* Coffee Card */
+/* == Coffee Card adjustments == */
 .coffee-section {
   display: flex;
   justify-content: center;
+  padding: 1rem 0;               /* add some vertical spacing */
 }
+
 .coffee-card {
-  max-width: 320px;
-  text-align: center;
+  max-width: 280px;              /* reduce width to 280px */
+  width: 100%;                   /* responsive full width within container */
+  padding: 1rem;                 /* add internal padding */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  border-radius: var(--radius);  /* match global border radius */
+  background: var(--color-secondary); /* ensure white background */
 }
+
 .coffee-card h2 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.2rem;             /* slightly smaller heading */
+  margin-bottom: 0.75rem;        /* space below heading */
 }
+
+.coffee-card a.coffee-button {
+  display: block;                /* make link a block-level element */
+  margin: 0 auto;                /* center horizontally */
+  max-width: 240px;              /* limit button width */
+}
+
 .coffee-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
+  width: 100%;                   /* fill its container width */
+  height: auto;                  /* maintain aspect ratio */
+  border-radius: 6px;            /* keep a bit of rounding */
+  object-fit: contain;           /* prevent cropping or distortion */
 }
+
 
 /* Footer */
 .site-footer {
@@ -232,7 +248,6 @@ body {
   white-space: nowrap;
   border: 0;
 }
-/* mensagem em modo sumário */
 .message-summary {
   background: var(--bg-light);
   padding: 0.75rem 1rem;
@@ -247,7 +262,6 @@ body {
   background: #e8ebf7;
 }
 
-/* container da mensagem expandida */
 .message-detail {
   background: var(--color-secondary);
   border-radius: var(--radius);
@@ -256,7 +270,6 @@ body {
   margin-bottom: 1rem;
 }
 
-/* botões de ação dentro do detail */
 .message-detail .msg-actions {
   display: flex;
   gap: 0.5rem;
@@ -310,40 +323,39 @@ body {
 #btn-close:hover {
   background: #b71c1c;
 }
-/* 1. wrapper vira flex, centraliza e dá um espacinho entre elementos */
+
 .email-row {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem; /* ou o que ficar melhor */
+  align-items: stretch;   
+  overflow: visible;      
 }
 
-/* 2. código perde os margin auto (já que é controlado pela wrapper) e arredonda só o lado esquerdo */
-.email-row .email-code {
-  display: block;      /* continua bloco para embutir padding corretamente */
-  margin: 0;           /* tira o auto que centralizava */
-  padding: 0.5rem 0.75rem; /* ajuste se quiser menos espaço horizontal */
-  border-radius: var(--radius) 0 0 var(--radius);
+.email-row .email-code,
+.email-row .copy-btn {
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  border: 1px solid #d1d1d1;        
   background: var(--bg-light);
+  font-family: monospace;
   font-weight: 600;
+  line-height: 1.2;               
 }
 
-/* 3. botão de copy recebe padding, sem borda e sua própria cor de fundo */
-.copy-btn {
+.email-row .email-code {
+  border-radius: var(--radius) 0 0 var(--radius);
+  border-right: none;               
+}
+
+.email-row .copy-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0.75rem;
-  border: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--bg-light);
   cursor: pointer;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 1rem;    /* se usar emoji como ícone */
-  line-height: 1;
 }
-
-/* 4. hover sutil pra indicar click */
-.copy-btn:hover {
+.email-row .copy-btn:hover {
   background: rgba(0,0,0,0.05);
 }
 
