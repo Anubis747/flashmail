@@ -357,12 +357,14 @@ function toast(textKey){
 }
 
 function copyEmail() {
-  const addr = document.getElementById('email-address')?.textContent.trim();
+  const addr = document.getElementById('email-address').textContent;
   if (!addr) return;
   navigator.clipboard.writeText(addr).then(() => {
-    toast('toast.copied'); // reuse your toast function
+    toast('copied');  // see translations for 'copied'
   });
 }
+// attach listener after rendering the inbox
+document.getElementById('btn-copy').addEventListener('click', copyEmail);
 
 /* ------------------ message list ------------------------ */
 function renderMessages(msgs){
