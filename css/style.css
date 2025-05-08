@@ -192,10 +192,11 @@ body {
 }
 
 /* == Coffee Card adjustments == */
-.coffee-section {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;               /* add some vertical spacing */
+.card.coffee-section {
+  /* override the generic .card max-width:inherit / width:100% */
+  max-width: 320px;    /* same as .coffee-card inner width */
+  width: auto;         /* let it size to its content */
+  margin: 2rem auto;   /* keep it centered */
 }
 
 .coffee-card {
@@ -325,38 +326,32 @@ body {
 }
 
 .email-row {
+  /* inline-flex keeps the email + button on one line */
   display: inline-flex;
-  align-items: stretch;   
-  overflow: visible;      
-}
-
-.email-row .email-code,
-.email-row .copy-btn {
-  box-sizing: border-box;
-  padding: 0.5rem 0.75rem;
-  margin: 0;
-  border: 1px solid #d1d1d1;        
-  background: var(--bg-light);
-  font-family: monospace;
-  font-weight: 600;
-  line-height: 1.2;               
+  align-items: center;
+  gap: 0.5rem; /* space between address and button */
 }
 
 .email-row .email-code {
-  border-radius: var(--radius) 0 0 var(--radius);
-  border-right: none;               
+  /* no max-width here, let it grow to show full address */
+  flex: none;
+  white-space: nowrap;
 }
 
-.email-row .copy-btn {
+.copy-btn {
+  /* make the copy icon button just large enough */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  background: var(--bg-light);
+  padding: 0.3rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
   cursor: pointer;
-}
-.email-row .copy-btn:hover {
-  background: rgba(0,0,0,0.05);
+
+  /* ensure it’s never clipped by its container */
+  width: auto;
+  height: auto;
 }
 
 @keyframes flash {
