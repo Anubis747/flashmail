@@ -372,20 +372,33 @@ function copyEmail() {
 document.getElementById('btn-copy').addEventListener('click', copyEmail);
 
 /* ------------------ message list ------------------------ */
-function renderMessages(msgs){
+// Render email summaries and toggle to show full detail on click without auto-scrolling
+function renderMessages(msgs) {
   const box = document.getElementById('messages');
-  box.innerHTML='';
-  msgs.forEach(m=>{
-    const line=document.createElement('div');
-    line.className='message-summary';
-    line.innerHTML=`<span><strong>${escapeHTML(m.subject||'(no subject)')}</strong> — ${escapeHTML(m.sender)}</span><span>▼</span>`;
-    line.onclick=()=>{
-      const det=document.createElement('div');
-      det.className='message-detail';
-      det.innerHTML=`<h3>${escapeHTML(m.subject||'(no subject)')}</h3><p><em>${escapeHTML(m.sender)}</em></p><p>${escapeHTML(m.body).replace(/\n/g,'<br>')}</p>`;
+  box.innerHTML = '';
+
+  msgs.forEach(m => {
+    // Create summary line
+    const line = document.createElement('div');
+    line.className = 'message-summary';
+    line.innerHTML = `
+      <span><strong>${escapeHTML(m.subject || '(no subject)')}</strong> — ${escapeHTML(m.sender)}</span>
+      <span>▼</span>
+    `;
+
+    // Toggle detail view on click
+    line.onclick = () => {
+      const det = document.createElement('div');
+      det.className = 'message-detail';
+      det.innerHTML = `
+        <h3>${escapeHTML(m.subject || '(no subject)')}</h3>
+        <p><em>From: ${escapeHTML(m.sender)}</em></p>
+        <p>${escapeHTML(m.body).replace(/\n/g, '<br>')}</p>
+      `;
       line.replaceWith(det);
-      det.scrollIntoView({behavior:'smooth',block:'start'});
+      // Removed det.scrollIntoView to leave scrolling under user control
     };
+
     box.appendChild(line);
   });
 }
