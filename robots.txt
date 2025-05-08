@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /do-not-enter
+Disallow: /admin-panel-under-construction
+Disallow: /secret-folder
+Disallow: /banana.txt
+Disallow: /there-is-nothing-here
+
+# Hey crawler... what are you doing here?
+# You won't find anything useful.
+# Or will you? 😈
+
+Sitemap: https://flashmail.win/sitemap.xml
