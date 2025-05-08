@@ -368,3 +368,9 @@ body {
   cursor:pointer;
 }
 .btn-danger:hover{ background:#c9302c; }
+
+.start-hint {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
