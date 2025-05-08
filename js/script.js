@@ -444,15 +444,22 @@ function startTimer(){
 /* ==========================================================
    5.  API polling                                          
    ========================================================== */
-async function fetchMessages(){
-  if(!currentId)return;
-  try{
-    const r=await fetch(`${CONFIG.apiBase}/messages/${currentId}`);
-    if(!r.ok) throw new Error(r.status);
-    const msgs=await r.json();
-    if(msgs.length>lastCount){ toast('toast.newMessage'); lastCount=msgs.length;}
-    renderMessages(msgs);
-  }catch(e){ console.warn('poll error',e); }
+async function fetchMessages() {
+  if (!currentId) return;
+  try {
+    const r = await fetch(`${CONFIG.apiBase}/messages/${currentId}`);
+    if (!r.ok) throw new Error(r.status);
+    const msgs = await r.json();
+
+    // Only re-render when truly new messages arrive
+    if (msgs.length > lastCount) {
+      toast('toast.newMessage');
+      lastCount = msgs.length;
+      renderMessages(msgs);
+    }
+  } catch (e) {
+    console.warn('poll error', e);
+  }
 }
 
 /* ==========================================================
