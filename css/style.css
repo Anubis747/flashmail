@@ -193,10 +193,10 @@ body {
 
 /* == Coffee Card adjustments == */
 .card.coffee-section {
-  /* override the generic .card max-width:inherit / width:100% */
-  max-width: 800px;    /* same as .coffee-card inner width */
-  width: auto;         /* let it size to its content */
-  margin: 2rem auto;   /* keep it centered */
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
 }
 
 .coffee-card {
