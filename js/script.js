@@ -65,7 +65,7 @@ const i18n = {
     'toast.newMessage': 'New message received',
     'btn.close': 'Close Inbox',
     'inbox.closed': 'Inbox closed. All messages deleted.',
-    'confirm.close': 'Close the inbox and delete all messages?'
+    'confirm.close': 'Close the inbox and delete all messages? Please note you will only be able to open a new inbox after 15 minutes.'
   },
 
   /* ---------- Portuguese --------------------------------- */
@@ -111,7 +111,7 @@ const i18n = {
     'toast.newMessage': 'Nova mensagem recebida',
     'btn.close': 'Encerrar Caixa',
     'inbox.closed': 'Caixa encerrada. Todas as mensagens foram apagadas.',
-    'confirm.close': 'Encerrar a inbox e apagar todas as mensagens?'
+    'confirm.close': 'Encerrar a inbox e apagar todas as mensagens? Você só poderá abrir uma nova caixa após 15 minutos.''
   },
 
   /* ---------- Spanish ------------------------------------ */
@@ -157,7 +157,7 @@ const i18n = {
     'toast.newMessage': 'Nuevo mensaje recibido',
     'btn.close': 'Cerrar bandeja',
     'inbox.closed': 'Bandeja cerrada. Todos los mensajes fueron eliminados.',
-    'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes?'
+    'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes? Ten en cuenta que solo podrás abrir una nueva bandeja después de 15 minutos.','
   },
 
   /* ---------- French ------------------------------------- */
@@ -203,7 +203,7 @@ const i18n = {
     'toast.newMessage': 'Nouveau message reçu',
     'btn.close': 'Fermer la boîte',
     'inbox.closed': 'Boîte fermée. Tous les messages ont été supprimés.',
-    'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages ?'
+    'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages? Veuillez noter que vous ne pourrez rouvrir une nouvelle boîte qu’au bout de 15 minutes.','
   },
 
   /* ---------- German ------------------------------------- */
@@ -250,7 +250,7 @@ const i18n = {
     'copied': 'In die Zwischenablage kopiert',
     'btn.close': 'Postfach schließen',
     'inbox.closed': 'Postfach geschlossen. Alle Nachrichten wurden gelöscht.',
-    'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen?'
+    'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen? Bitte beachten Sie, dass Sie erst nach 15 Minuten ein neues Postfach öffnen können.','
   },
 
   /* ---------- Russian ------------------------------------ */
@@ -297,7 +297,7 @@ const i18n = {
     'copied': 'Скопировано в буфер обмена',
     'btn.close': 'Закрыть ящик',
     'inbox.closed': 'Ящик закрыт. Все сообщения удалены.',
-    'confirm.close': 'Закрыть ящик и удалить все сообщения?'
+    'confirm.close': 'Закрыть ящик и удалить все сообщения? Обратите внимание, что новый ящик можно будет открыть только через 15 минут.''
   }
 };
 
