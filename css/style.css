@@ -310,23 +310,43 @@ body {
 #btn-close:hover {
   background: #b71c1c;
 }
-/* copy icon next to the address */
-.copy-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-left: 0.5rem;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
-.copy-btn:hover {
-  opacity: 1;
-}
+/* 1. wrapper vira flex, centraliza e dá um espacinho entre elementos */
 .email-row {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.25rem; /* ou o que ficar melhor */
 }
+
+/* 2. código perde os margin auto (já que é controlado pela wrapper) e arredonda só o lado esquerdo */
+.email-row .email-code {
+  display: block;      /* continua bloco para embutir padding corretamente */
+  margin: 0;           /* tira o auto que centralizava */
+  padding: 0.5rem 0.75rem; /* ajuste se quiser menos espaço horizontal */
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: var(--bg-light);
+  font-weight: 600;
+}
+
+/* 3. botão de copy recebe padding, sem borda e sua própria cor de fundo */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: var(--bg-light);
+  cursor: pointer;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 1rem;    /* se usar emoji como ícone */
+  line-height: 1;
+}
+
+/* 4. hover sutil pra indicar click */
+.copy-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
 @keyframes flash {
   0% { transform: scale(1.1); }
   80%{ transform: scale(.95); }
