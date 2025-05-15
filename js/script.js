@@ -58,8 +58,6 @@ const i18n = {
     'faq.a7': 'No. Anyone with access to the same inbox link can read incoming messages. Avoid using it for password resets or confidential data.',
     'faq.q8': 'Is there a cooldown between inboxes?',
     'faq.a8': 'Yes. You must wait 15 minutes before creating a new inbox after closing one.',
-    'about.title': 'About Us',
-    'about.text': 'FlashMail is a disposable email service. No login, no tracking. Just privacy.',
     'privacy.title': 'Privacy Policy',
     'privacy.text': `
       <p><strong>Effective Date:</strong> May 7, 2025</p>
@@ -121,7 +119,6 @@ const i18n = {
     'faq.q8': 'Existe um tempo de espera entre as caixas?',
     'faq.a8': 'Sim. É necessário esperar 15 minutos para criar uma nova caixa após fechar a anterior.', 
     'about.title': 'Sobre Nós',
-    'about.text': 'FlashMail é um serviço de e‑mail descartável. Sem login, sem rastreio. Só privacidade.',
     'privacy.title': 'Política de Privacidade',
     'privacy.text': `
       <p><strong>Vigente a partir de:</strong> 7 de maio de 2025</p>
@@ -183,7 +180,6 @@ const i18n = {
     'faq.q8': '¿Existe un tiempo de espera entre buzones?',
     'faq.a8': 'Sí. Debes esperar 15 minutos antes de crear un nuevo buzón después de cerrar uno.',
     'about.title': 'Acerca de Nosotros',
-    'about.text': 'FlashMail es un servicio de correo desechable. Sin registros, sin seguimiento. Solo privacidad.',
     'privacy.title': 'Política de Privacidad',
     'privacy.text': `
       <p><strong>Fecha de vigencia:</strong> 7 de mayo de 2025</p>
@@ -245,7 +241,6 @@ const i18n = {
     'faq.q8': 'Y a-t-il un délai entre les boîtes ?',
     'faq.a8': 'Oui. Vous devez attendre 15 minutes avant de créer une nouvelle boîte après en avoir fermé une.',
     'about.title': 'À propos de nous',
-    'about.text': 'FlashMail est un service de messagerie jetable. Pas d’inscription, pas de suivi. Juste de la confidentialité.',
     'privacy.title': 'Politique de confidentialité',
     'privacy.text': `
       <p><strong>Date d’effet :</strong> 7 mai 2025</p>
@@ -307,7 +302,6 @@ const i18n = {
     'faq.q8': 'Gibt es eine Wartezeit zwischen Postfächern?',
     'faq.a8': 'Ja. Sie müssen 15 Minuten warten, bevor Sie nach dem Schließen ein neues Postfach erstellen können.',
     'about.title': 'Über uns',
-    'about.text': 'FlashMail ist ein temporärer E‑Mail‑Dienst. Kein Login, kein Tracking – nur Privatsphäre.',
     'privacy.title': 'Datenschutzerklärung',
     'privacy.text': `
       <p><strong>Gültig ab:</strong> 7. Mai 2025</p>
@@ -370,7 +364,6 @@ const i18n = {
     'faq.q8': 'Есть ли задержка между созданием ящиков?',
     'faq.a8': 'Да. После закрытия ящика нужно подождать 15 минут, прежде чем создать новый.',
     'about.title': 'О нас',
-    'about.text': 'FlashMail — это одноразовая электронная почта. Без регистрации, без слежки. Только конфиденциальность.',
     'privacy.title': 'Политика конфиденциальности',
     'privacy.text': `
       <p><strong>Дата вступления в силу:</strong> 7 мая 2025 г.</p>
