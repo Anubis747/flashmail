@@ -90,6 +90,7 @@ const i18n = {
     'nav.mailbox': 'Principal',
     'nav.faq': 'FAQ',
     'nav.about': 'Sobre',
+    'about.title': 'Sobre Nós',
     'about.p1': 'O FlashMail é um serviço rápido e focado em privacidade que fornece e-mails temporários para ajudar você a proteger sua caixa principal contra spam, rastreamento e mensagens indesejadas. Acreditamos que todos merecem ferramentas simples para manter a segurança online — sem abrir mão da praticidade.',
     'about.p2': 'Diferente da maioria das plataformas, não pedimos cadastro, senhas ou dados pessoais. Ao clicar em “Criar Caixa”, geramos um endereço aleatório válido por 20 minutos. Durante esse tempo, ele pode receber mensagens instantaneamente e de forma anônima.',
     'about.p3': 'Nossa infraestrutura é leve, sem servidores dedicados e feita para ser segura. O FlashMail não usa cookies, não rastreia sua atividade e não armazena mensagens após o tempo expirar. É gratuito, aberto por natureza e sustentado por anúncios discretos de terceiros.',
@@ -118,7 +119,6 @@ const i18n = {
     'faq.a7': 'Não. Qualquer pessoa com acesso ao link da caixa pode ler as mensagens recebidas. Evite usar para senhas ou dados confidenciais.',
     'faq.q8': 'Existe um tempo de espera entre as caixas?',
     'faq.a8': 'Sim. É necessário esperar 15 minutos para criar uma nova caixa após fechar a anterior.', 
-    'about.title': 'Sobre Nós',
     'privacy.title': 'Política de Privacidade',
     'privacy.text': `
       <p><strong>Vigente a partir de:</strong> 7 de maio de 2025</p>
