@@ -78,6 +78,10 @@ const i18n = {
     'confirm.close': 'Close the inbox and delete all messages? Please note you will only be able to open a new inbox after 15 minutes.',
     'nav.terms': 'Terms',
     'nav.contact': 'Contact',
+    'terms.title': 'Terms of Use',
+    'terms.p1': 'By using FlashMail, you agree to use the service only for lawful purposes. This service is intended for personal use, such as testing websites or avoiding spam.',
+    'terms.p2': 'You may not use FlashMail to send unsolicited messages, abuse other services, commit fraud, or engage in illegal activity. Any misuse may result in access being restricted.',
+    'terms.p3': 'FlashMail is offered “as-is”, with no guarantees about uptime, email delivery, or long-term availability. We may block, limit, or discontinue access at any time without notice.',
     'footer.rights': '© <span id="year"></span> FlashMail — Privacy-first temporary email'
   },
 
@@ -136,6 +140,10 @@ const i18n = {
     'confirm.close': 'Encerrar a inbox e apagar todas as mensagens? Você só poderá abrir uma nova caixa após 15 minutos.',
     'nav.terms': 'Termos',
     'nav.contact': 'Contato',
+    'terms.title': 'Termos de Uso',
+    'terms.p1': 'Ao usar o FlashMail, você concorda em utilizá-lo apenas para fins legais. O serviço é destinado ao uso pessoal, como testar sites ou evitar spam.',
+    'terms.p2': 'Você não pode usar o FlashMail para enviar mensagens indesejadas, abusar de outros serviços, cometer fraudes ou realizar atividades ilegais. Qualquer uso indevido pode resultar em restrição de acesso.',
+    'terms.p3': 'O FlashMail é fornecido "como está", sem garantias quanto à disponibilidade, entrega de e-mails ou continuidade do serviço. Podemos bloquear, limitar ou encerrar o acesso a qualquer momento, sem aviso prévio.',
     'footer.rights': '© <span id="year"></span> FlashMail — E-mail temporário com foco em privacidade'
   },
 
@@ -194,6 +202,10 @@ const i18n = {
     'confirm.close': '¿Cerrar la bandeja de entrada y eliminar todos los mensajes? Ten en cuenta que solo podrás abrir una nueva bandeja después de 15 minutos.',
     'nav.terms': 'Términos',
     'nav.contact': 'Contacto',
+    'terms.title': 'Términos de Uso',
+    'terms.p1': 'Al utilizar FlashMail, aceptas usar el servicio únicamente con fines legales. El servicio está destinado a uso personal, como probar sitios web o evitar el spam.',
+    'terms.p2': 'No puedes usar FlashMail para enviar mensajes no solicitados, abusar de otros servicios, cometer fraudes o realizar actividades ilegales. Cualquier mal uso puede resultar en la restricción del acceso.',
+    'terms.p3': 'FlashMail se ofrece "tal cual", sin garantías sobre disponibilidad, entrega de correos o continuidad del servicio. Podemos bloquear, limitar o finalizar el acceso en cualquier momento sin previo aviso.',
     'footer.rights': '© <span id="year"></span> FlashMail — Correo temporal centrado en la privacidad'
   },
 
@@ -252,6 +264,10 @@ const i18n = {
     'confirm.close': 'Fermer la boîte de réception et supprimer tous les messages? Veuillez noter que vous ne pourrez rouvrir une nouvelle boîte qu’au bout de 15 minutes.',
     'nav.terms': 'Conditions',
     'nav.contact': 'Contact',
+    'terms.title': 'Conditions d’Utilisation',
+    'terms.p1': 'En utilisant FlashMail, vous acceptez de n’utiliser le service que dans un cadre légal. Ce service est destiné à un usage personnel, comme tester des sites ou éviter les spams.',
+    'terms.p2': 'Vous ne pouvez pas utiliser FlashMail pour envoyer des messages non sollicités, abuser d’autres services, commettre des fraudes ou participer à des activités illégales. Tout usage abusif peut entraîner une restriction d’accès.',
+    'terms.p3': 'FlashMail est fourni "en l’état", sans garantie de disponibilité, de livraison d’e-mails ou de continuité. Nous pouvons bloquer, limiter ou suspendre l’accès à tout moment, sans préavis.',
     'footer.rights': '© <span id="year"></span> FlashMail — E-mail temporaire axé sur la confidentialité'
   },
 
@@ -311,6 +327,10 @@ const i18n = {
     'confirm.close': 'Postfach wirklich schließen und alle Nachrichten löschen? Bitte beachten Sie, dass Sie erst nach 15 Minuten ein neues Postfach öffnen können.',
     'nav.terms': 'Nutzungsbedingungen',
     'nav.contact': 'Kontakt',
+    'terms.title': 'Nutzungsbedingungen',
+    'terms.p1': 'Durch die Nutzung von FlashMail erklären Sie sich damit einverstanden, den Dienst nur für rechtmäßige Zwecke zu verwenden. Der Dienst ist für den persönlichen Gebrauch gedacht, z. B. zum Testen von Websites oder zum Schutz vor Spam.',
+    'terms.p2': 'Sie dürfen FlashMail nicht verwenden, um unerwünschte Nachrichten zu versenden, andere Dienste zu missbrauchen, Betrug zu begehen oder illegale Aktivitäten durchzuführen. Missbrauch kann zur Sperrung führen.',
+    'terms.p3': 'FlashMail wird „wie besehen“ bereitgestellt – ohne Garantie für Verfügbarkeit, Zustellung von E-Mails oder langfristige Bereitstellung. Der Zugang kann jederzeit ohne Vorankündigung eingeschränkt oder beendet werden.',
     'footer.rights': '© <span id="year"></span> FlashMail — Temporäre E-Mail mit Fokus auf Datenschutz'
   },
 
@@ -370,6 +390,10 @@ const i18n = {
     'confirm.close': 'Закрыть ящик и удалить все сообщения? Обратите внимание, что новый ящик можно будет открыть только через 15 минут.',
     'nav.terms': 'Условия',
     'nav.contact': 'Контакт',
+    'terms.title': 'Условия Использования',
+    'terms.p1': 'Используя FlashMail, вы соглашаетесь применять его только в законных целях. Сервис предназначен для личного использования, например, для тестирования сайтов или защиты от спама.',
+    'terms.p2': 'Вы не можете использовать FlashMail для рассылки спама, злоупотребления другими сервисами, мошенничества или незаконной деятельности. Нарушение правил может привести к ограничению доступа.',
+    'terms.p3': 'FlashMail предоставляется "как есть" — без каких-либо гарантий доступности, доставки писем или сохранности сервиса. Мы можем ограничить или прекратить доступ в любой момент без уведомления.',
     'footer.rights': '© <span id="year"></span> FlashMail — Временная почта с приоритетом конфиденциальности'
   }
 };
