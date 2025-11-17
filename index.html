@@ -1,206 +1,458 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google" content="notranslate">
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="title">FlashMail</title>
-
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  base-uri 'self';
-  form-action 'self';
-  connect-src 'self' https://api.flashmail.win https://fundingchoicesmessages.google.com https://ep1.adtrafficquality.google;
-  script-src 'self' 'unsafe-inline'
-    https://pagead2.googlesyndication.com
-    https://www.googletagservices.com
-    https://fundingchoicesmessages.google.com
-    https://ep2.adtrafficquality.google;
-  style-src 'self' 'unsafe-inline'
-    https://fonts.googleapis.com
-    https://cdnjs.cloudflare.com;
-  font-src 'self'
-    https://fonts.gstatic.com
-    https://cdnjs.cloudflare.com;
-  frame-src
-    https://googleads.g.doubleclick.net
-    https://*.googlesyndication.com;
-  img-src 'self' data: https://img.buymeacoffee.com;
-  object-src 'none';
-">
-
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9273959048665563"
-     crossorigin="anonymous"></script>
-  
-  <!-- Fonts & Styles -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>FlashMail - Under Maintenance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='90' font-size='90'>✉️</text></svg>">
+  
+  <style>
+    :root {
+      --primary: #0052cc;
+      --primary-dark: #003d99;
+      --accent: #ff8c00;
+      --bg-light: #f0f4ff;
+      --text-dark: #172b4d;
+      --text-light: #ffffff;
+      --neutral-100: #f8fafc;
+      --neutral-200: #e2e8f0;
+      --neutral-300: #cbd5e1;
+    }
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-      <text y='90' font-size='90'>✉️</text>
-    </svg>" />
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    /* Logo animado */
+    .logo-wrapper {
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo {
+      font-size: 5rem;
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+      filter: drop-shadow(0 10px 30px rgba(0, 82, 204, 0.2));
+    }
+
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(0, 82, 204, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Título */
+    .brand-name {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      opacity: 0.7;
+      margin-bottom: 3rem;
+    }
+
+    /* Card principal */
+    .maintenance-card {
+      background: var(--text-light);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: 
+        0 20px 60px rgba(0, 82, 204, 0.1),
+        0 0 0 1px rgba(0, 82, 204, 0.05);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .maintenance-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 140, 0, 0.1);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      opacity: 0.8;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      text-align: left;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--neutral-100);
+      border-radius: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 82, 204, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .feature-content h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-content p {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+
+    /* Progress bar */
+    .progress-section {
+      margin: 2rem 0;
+      text-align: left;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--neutral-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 10px;
+      animation: progress 2s ease-out;
+      width: 65%;
+    }
+
+    /* Contact info */
+    .contact-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--neutral-200);
+    }
+
+    .contact-text {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(0, 82, 204, 0.05);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .contact-email:hover {
+      background: rgba(0, 82, 204, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      opacity: 0.6;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes progress {
+      from {
+        width: 0;
+      }
+      to {
+        width: 65%;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 4rem;
+      }
+
+      .brand-name {
+        font-size: 2.5rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .maintenance-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+
+      .logo {
+        font-size: 3.5rem;
+      }
+
+      .brand-name {
+        font-size: 2rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="container site-header-inner">
-    <h1 class="logo" data-i18n="header.title">Your easiest temporary email service.</h1>
-    <nav class="main-nav">
-      <a href="#mailbox-area" class="tab" data-target="mailbox-area" data-i18n="nav.mailbox">Inbox</a>
-      <a href="#faq" class="tab" data-target="faq" data-i18n="nav.faq">FAQ</a>
-      <a href="#about" class="tab" data-target="about" data-i18n="nav.about">About</a>
-      <a href="#privacy" class="tab" data-target="privacy" data-i18n="nav.privacy">Privacy</a>
-      <a href="#terms" class="tab" data-target="terms" data-i18n="nav.terms">Terms</a>
-      <a href="mailto:tell_me@flashmail.win" class="tab" data-i18n="nav.contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
-  <section id="mailbox-area" class="card">
-     <p class="start-hint" data-i18n="inbox.startHint"></p>
-    <!-- Create button (shown before the inbox is started) -->
-    <button id="btn-create"
-            class="btn-primary"
-            data-i18n="btn.create">
-      Create Inbox
-    </button>
-
-    <!-- Close button (red, hidden until an inbox is active) -->
-    <button id="btn-close"
-            class="btn-danger hidden"
-            data-i18n="btn.close">
-      Close Inbox
-    </button>
-
-    <!-- 20‑minute countdown -->
-    <p id="timer" class="timer hidden">20:00</p>
-
-    <!-- Everything related to the active inbox lives inside #inbox -->
-    <div id="inbox" class="inbox hidden">
-
-      <!-- E‑mail address label -->
-      <p class="inbox-label" data-i18n="inbox.label">Your email:</p>
-
-      <!-- Address + copy‑to‑clipboard button -->
-<div class="email-row">
-  <code id="email-address" class="email-code"></code>
-  <!-- copy button: use a small icon button -->
-<i class="fa-solid fa-copy copy-btn" id="btn-copy" role="button" tabindex="0" aria-label="Copy email" title="Copy"></i>
-</div>
-
-
-      <!-- Message list is filled by the script -->
-      <div id="messages" class="message-list"></div>
-    </div>
-
-    <!-- Shown after the inbox is closed / time‑out -->
-    <p id="closed-msg"
-       class="closed-msg hidden"
-       data-i18n="inbox.closed">
-      Inbox closed. All messages deleted.
-    </p>
-  </section>
-</main>
-
-  <div class="lang-inline">
-    <label for="lang-select" class="sr-only">Language</label>
-    <select id="lang-select" aria-label="Select language">
-      <option value="en">English</option>
-      <option value="pt">Português</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-    </select>
-  </div>
-
-  <!-- Support -->
-  <section class="card coffee-section">
-    <div class="coffee-card">
-      <h2 data-i18n="support.title">Did you enjoy our service?</h2>
-      <p data-i18n="support.text">Please consider supporting us via the button below.</p>
-      <a href="https://www.buymeacoffee.com/liveordead" target="_blank" rel="noopener noreferrer" class="coffee-button">
-        <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=liveordead&button_colour=7ad3ff&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=FFDD00" alt="Buy me a coffee"/>
-      </a>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="card content hidden">
-    <h2 data-i18n="faq.title">FAQ</h2>
-    <ul>
-      <li><strong data-i18n="faq.q1">How long does the email address live?</strong>
-          <p data-i18n="faq.a1">Each inbox is valid for 20 minutes by default and then all messages are purged.</p>
-      </li>
-      <li><strong data-i18n="faq.q2">Can I extend the expiration?</strong>
-          <p data-i18n="faq.a2">Yes—before it expires, click “Create Inbox” again to reset the 20-minute timer.</p>
-      </li>
-      <li><strong data-i18n="faq.q3">Do you store any personal data?</strong>
-          <p data-i18n="faq.a3">No—no registration or personal data is ever collected or stored.</p>
-      </li>
-      <li><strong data-i18n="faq.q4">Is this service free?</strong>
-          <p data-i18n="faq.a4">Yes—fully free, ad-supported, no signup required.</p>
-      </li>
-      <li><strong data-i18n="faq.q5">Are there any usage limits?</strong>
-          <p data-i18n="faq.a5">Unlimited inboxes; each accepts unlimited messages for its 20-minute life.</p>
-      </li>
-    </ul>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="card content hidden">
-  <h2 data-i18n="about.title">About Us</h2>
-  <p data-i18n="about.p1">
-    FlashMail is a fast, privacy-friendly disposable email service designed to help you protect your real inbox from spam, tracking, and unnecessary clutter. We believe everyone deserves simple tools to stay safe online—without giving up convenience.
-  </p>
-  <p data-i18n="about.p2">
-    Unlike most platforms, we don’t ask for registration, passwords, or personal details. When you click “Create Inbox”, we generate a random address that stays active for 20 minutes. During that time, it can receive messages instantly and anonymously.
-  </p>
-  <p data-i18n="about.p3">
-    Our entire infrastructure is built to be lightweight, serverless, and secure. FlashMail does not use cookies, does not track your activity, and does not store messages beyond their lifespan. It’s free, open by design, and supported by minimal third-party ads.
-  </p>
-</section>
-
-  <!-- Privacy -->
-  <section id="privacy" class="card content hidden">
-    <h2 data-i18n="privacy.title">Privacy Policy</h2>
-    <div data-i18n="privacy.text"></div>
-  </section>
-
-  <!-- Terms -->
-  <section id="terms" class="card content hidden">
-  <h2 data-i18n="terms.title">Terms of Use</h2>
-  <p data-i18n="terms.p1">
-    By using FlashMail, you agree to use the service only for lawful purposes. This service is intended for personal use, such as testing websites or avoiding spam.
-  </p>
-  <p data-i18n="terms.p2">
-    You may not use FlashMail to send unsolicited messages, abuse other services, commit fraud, or engage in illegal activity. Any misuse may result in access being restricted.
-  </p>
-  <p data-i18n="terms.p3">
-    FlashMail is offered “as-is”, with no guarantees about uptime, email delivery, or long-term availability. We may block, limit, or discontinue access at any time without notice.
-  </p>
-</section>
-</main>
-
-<footer class="site-footer">
   <div class="container">
-    <p data-i18n="footer.rights">&copy; <span id="year"></span> FlashMail — Privacy-first temporary email</p>
+    <!-- Logo animado -->
+    <div class="logo-wrapper">
+      <div class="logo-glow"></div>
+      <div class="logo">✉️</div>
+    </div>
+
+    <!-- Brand -->
+    <h2 class="brand-name">FlashMail</h2>
+    <p class="tagline">Privacy-First Temporary Email</p>
+
+    <!-- Card principal -->
+    <div class="maintenance-card">
+      <!-- Badge de status -->
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Under Maintenance
+      </div>
+
+      <!-- Título -->
+      <h1>We're Building Something Better</h1>
+      
+      <!-- Descrição -->
+      <p class="description">
+        FlashMail is currently undergoing a major upgrade to bring you enhanced features, 
+        improved privacy, stronger security, and much more. We'll be back soon with an 
+        even better experience.
+      </p>
+
+      <!-- Progress bar -->
+      <div class="progress-section">
+        <div class="progress-label">
+          <span>Development Progress</span>
+          <span>65%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Features vindos -->
+      <div class="features">
+        <div class="feature-item">
+          <span class="feature-icon">🔐</span>
+          <div class="feature-content">
+            <h3>Enhanced Security</h3>
+            <p>Military-grade encryption and protection</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <div class="feature-content">
+            <h3>Better Management</h3>
+            <p>Advanced inbox control and features</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-content">
+            <h3>Premium Plans</h3>
+            <p>Extended time and exclusive features</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">🚀</span>
+          <div class="feature-content">
+            <h3>Faster Performance</h3>
+            <p>Lightning-fast email delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contato -->
+      <div class="contact-section">
+        <p class="contact-text">
+          Have questions or need assistance?
+        </p>
+        <a href="mailto:tell_me@flashmail.win" class="contact-email">
+          <span>📧</span>
+          tell_me@flashmail.win
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2024 FlashMail — Privacy-first temporary email service</p>
+    </div>
   </div>
-</footer>
-
-
-<div id="toast" class="hidden" data-i18n="toast.newMessage"></div>
-
-<script src="js/script.js"></script>
-  <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
